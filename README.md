@@ -3,6 +3,9 @@ Projeto demonstrativo para controle de kitnets, utilizando Angular 6, NodeJs e P
 # Projeto Back-End
 Apos rodas os passos abaixo, rodar o front-end nesse link [FRONT-END](https://github.com/thiago-jv/API-CONTROLE-DE-KITNETS)
 
+# Tela de controle de lançamentos
+[FRONT-END](https://github.com/thiago-jv/UI-CONTROLE-DE-KITNETS/blob/main/controle.png)
+
 # Pré-requisitos
 
 Nodejs 8.17.0 [Nodejs](https://nodejs.org/pt-br/download/)
