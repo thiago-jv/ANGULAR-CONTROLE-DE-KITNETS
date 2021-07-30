@@ -4,6 +4,11 @@ Nodejs 8.17.0 [Nodejs](https://nodejs.org/pt-br/download/)
 
 Instalar o angular 6 -> npm install -g  @angular/cli@1.7.3
 
+# Estrutura do projeto
+
+![Estrutura do Projeto](https://github.com/thiago-jv/UI-CONTROLE-DE-KITNETS/blob/main/estrutura_projeto_front_end.png)
+
+
 # Tecnologias utilizadas e outros
 
 1 - Angula [Sobre](https://angular.io/)
