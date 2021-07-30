@@ -1,0 +1,69 @@
+<div class="container">
+  <form autocomplete="off" (ngSubmit)="pesquisar()">
+  <div class="ui-g">
+
+    <div class="ui-g-12">
+      <h1>Predios</h1>
+    </div>
+
+    <div class="ui-g-12 ui-fluid">
+      <label>Descrição</label>
+      <input pInputText type="text" name="descricao" [(ngModel)]="filtro.descricao">
+    </div>
+
+  </div>
+
+  <div class="ui-g">
+    <div class="ui-g-12" style="margin-top: 30px;">
+
+    <p-toolbar>
+      <div class="ui-toolbar-group-left">
+        <button pButton type="submit" label="Pesquisar"></button>
+      </div> 
+
+      <div class="ui-toolbar-group-right">
+        <a pButton label="Novo" routerLink="/predio"></a>
+      </div>
+    </p-toolbar>
+    </div>
+  </div>
+</form>
+
+  <div class="ui-g">
+    <div class="ui-g-12">
+
+   <p-table [value]="predios" [paginator]="true" [rows]="filtro.intensPorPagina" [lazy]="true" [totalRecords]="totalRegistros"
+      (onLazyLoad)="aoMudarPagina($event)" [responsive]="true" emptyMessage="Nenhum valor encontrado"
+      #tabela>
+
+      <ng-template pTemplate="header">
+        <tr>
+          <th class="col-data-header">id</th>
+          <th class="col-valor-header">Descriçao</th>
+          <th class="col-acoes-header"></th>
+        </tr>
+      </ng-template>
+
+      <ng-template pTemplate="body" let-p>
+        <tr>
+          <td>{{ p.id }}</td>
+          <td>{{ p.descricao}}</td>
+          <td class="col-acoes">
+            <a pButton icon="fa fa-pencil" pTooltip="Editar"
+              tooltipPosition="top"
+              [routerLink]="['/predio', p.id]"></a>
+
+            <button pButton icon="fa fa-trash"
+              pTooltip="Excluir" tooltipPosition="top"
+              (click)="confirmarExclusao(p)"></button>
+          </td>
+        </tr>
+      </ng-template>
+
+    </p-table>
+
+  </div>
+  
+  </div>
+
+</div>

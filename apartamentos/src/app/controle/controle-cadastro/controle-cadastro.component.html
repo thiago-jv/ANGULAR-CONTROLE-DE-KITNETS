@@ -1,0 +1,157 @@
+<div class="container">
+  <form #f="ngForm" autocomplete="off" (ngSubmit)="salvar(f)">
+
+    <div class="ui-g">
+      <div class="ui-g-12">
+        <h1>{{ editando ? 'Edição de' : 'Novo' }} Controle Lancameto</h1>
+      </div>
+    </div>
+
+    <div class="ui-g">
+      <div class="ui-g-12" style="margin-top: 10px;">
+  
+      <p-toolbar>
+        <div class="ui-toolbar-group-left">
+          <button pButton type="submit" label="Salvar" [disabled]="f.invalid"></button>
+          <button pButton type="button" label="Novo" class="ui-button-info" (click)="novo(f)"></button>
+        </div> 
+  
+        <div class="ui-toolbar-group-right">
+          <a pButton label="Pesquisar" routerLink="/controles"></a>
+        </div>
+      </p-toolbar>
+      </div>
+    </div>
+
+    <div class="ui-g">
+    <p-fieldset legend="Entrada" class="ui-g-12 ui-fluid">
+
+      <div class="ui-g-12 ui-md-4 ui-fluid">
+        <label>Inquilinos</label>
+        <p-dropdown name="inquilino" [options]="inquilinos"
+          placeholder="Selecione" [autoWidth]="false"
+          [(ngModel)]="controle.inquilino.id"
+          required></p-dropdown>
+      </div>
+
+      <div class="ui-g-12 ui-md-4 ui-fluid">
+        <label>Apartamentos</label>
+        <p-dropdown name="apartamento" [options]="apartamentos"
+          placeholder="Selecione" [autoWidth]="false"
+          [(ngModel)]="controle.apartamento.id"
+          required></p-dropdown>
+      </div>
+    
+      <div class="ui-g-12 ui-md-4 ui-fluid">
+        <label>Valores</label>
+        <p-dropdown name="valor" [options]="valores"
+           [autoWidth]="false"  placeholder="Selecione" 
+          [(ngModel)]="controle.valor.id" (keyup)="buscarPorIdValor(controle.valor.id)"
+          required></p-dropdown>
+      </div>
+
+      <div class="ui-g-12 ui-md-2 ui-fluid">
+        <label>Dt. Entrada</label>
+        <p-calendar name="dataEntrada" dateFormat="dd/mm/yy"
+        [inline]="false" [readonlyInput]="false" [showIcon]="false" 
+          [(ngModel)]="controle.dataEntrada" [locale]="pt"
+          #dataEntrada="ngModel"  required></p-calendar>
+      </div>
+
+      <div class="ui-g-12 ui-md-2 ui-fluid">
+        <label>Dt. Prox. Pagamento</label>
+        <p-calendar name="dataPagamento" dateFormat="dd/mm/yy"
+        [inline]="false" [readonlyInput]="false" [showIcon]="false"
+          [(ngModel)]="controle.dataPagamento" [locale]="pt"
+          #dataPagamento="ngModel"  required></p-calendar>
+      </div>
+
+      <div class="ui-g-12 ui-md-8 ui-fluid">
+        <label>Observacao</label>
+          <textarea pInputTextarea rows="3" name="observacao"
+          [(ngModel)]="controle.observacao"
+          #observacao="ngModel"></textarea>
+      </div>
+
+      <div class="ui-g-12 ui-md-12 ui-fluid">
+        <label>Status próximo pagamento</label>
+        <p-selectButton id="statusProximoPagamento" name="statusProximoPagamento" [options]="statusProximoPagamento"
+          [(ngModel)]="controle.status.statusProximoPagamento" required></p-selectButton>
+      </div>
+
+    </p-fieldset>
+
+    <p-fieldset legend="Aba Luz" class="ui-g-12 ui-fluid">
+
+      <div class="ui-g-12 ui-md-3  ui-fluid">
+        <label>Entregou conta de luz</label>
+        <p-selectButton name="entragaContaLuz" [options]="entragaContaLuz"
+          [(ngModel)]="controle.status.entragaContaLuz" required></p-selectButton>
+      </div>
+
+      <div class="ui-g-12 ui-md-9 ui-fluid">
+        <label>Status Luz</label>
+        <p-selectButton id="statusApartamePagamentoLuz" name="statusApartamePagamentoLuz" [options]="statusApartamePagamentoLuz"
+          [(ngModel)]="controle.status.statusApartamePagamentoLuz" required></p-selectButton>
+      </div>
+
+    </p-fieldset>
+
+    <p-fieldset legend="Aba Apartamento" class="ui-g-12 ui-fluid">
+
+      <div class="ui-g-12 ui-md-3 ui-fluid">
+        <label>R$ Apartamento</label>
+          <input pInputText type="text" name="valorApartamento" placeholder="0,00"
+          currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',', allowNegative: false }"
+          [(ngModel)]="controle.valores.valorApartamento" readonly required>
+      </div>
+
+      <div class="ui-g-12 ui-md-1 ui-fluid">
+        <label>Dias</label>
+        <input pInputText type="text" name="dia"
+          [(ngModel)]="controle.valores.dia"
+          #dia="ngModel" maxlength="8" readonly>
+      </div>
+
+      <div class="ui-g-12  ui-md-1 ui-fluid">
+        <label>R$ Diária</label>
+        <input pInputText type="text" name="valorDiaria" placeholder="0,00"
+        currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',', allowNegative: false }"
+          [(ngModel)]="controle.valores.valorDiaria"
+          #valorDiaria="ngModel" maxlength="8" readonly>
+      </div>
+
+      <div class="ui-g-12  ui-md-1 ui-fluid">
+        <label>R$ Total</label>
+        <input pInputText type="text" name="valorTotalDiaria" placeholder="0,00"
+        currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',', allowNegative: false }"
+          [(ngModel)]="controle.valores.valorTotalDiaria"
+          #valorTotalDiaria="ngModel" maxlength="8" readonly>
+      </div>
+
+      <div class="ui-g-12 ui-md-3 ui-fluid">
+        <label>R$ Diárias</label>
+          <input pInputText type="text" name="valorPagoApartamento" placeholder="0,00"
+          currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',', allowNegative: false }"
+          [(ngModel)]="controle.valores.valorPagoApartamento" [disabled]="controle.valores.valorPagoApartamento === undefined">
+      </div>
+
+      <div class="ui-g-12 ui-md-3 ui-fluid">
+        <label>R$ Debito</label>
+          <input pInputText type="text" name="valorDebitoApartamento" placeholder="0,00"
+          currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',', allowNegative: false }"
+          [(ngModel)]="controle.valores.valorDebitoApartamento" readonly>
+      </div>
+
+      <div class="ui-g-12 ui-fluid">
+        <label>Status Apartamento</label>
+        <p-selectButton name="statusApartamePagamento" [options]="statusApartamePagamento"
+          [(ngModel)]="controle.statusApartamePagamento" disabled></p-selectButton>
+      </div>
+
+    </p-fieldset>
+
+    </div>
+
+  </form>
+</div>

@@ -1,0 +1,72 @@
+<div class="container">
+  <form #f="ngForm" autocomplete="off" (ngSubmit)="salvar(f)">
+
+    <div class="ui-g">
+      <div class="ui-g-12">
+        <h1>{{ editando ? 'Edição de' : 'Novo' }} Apartamento</h1>
+      </div>
+    </div>
+
+
+    <div class="ui-g">
+      <div class="ui-g-12" style="margin-top: 10px;">
+  
+      <p-toolbar>
+        <div class="ui-toolbar-group-left">
+          <button pButton type="submit" label="Salvar" [disabled]="f.invalid"></button>
+          <button pButton type="button" label="Novo" class="ui-button-info" (click)="novo(f)"></button>
+        </div> 
+  
+        <div class="ui-toolbar-group-right">
+          <a pButton label="Pesquisar" routerLink="/apartamentos"></a>
+        </div>
+      </p-toolbar>
+      </div>
+    </div>
+
+
+    <div class="ui-g">
+      <div class="ui-g-12 ui-md-8 ui-fluid">
+        <label>Descricao</label>
+        <input pInputText type="text" name="descricao"
+        name="descricao" [(ngModel)]="apartamento.descricao"
+        #descricao="ngModel" required maxlength="60" minlength="2">
+
+        <app-message [control]="descricao" error="required"
+          text="Informe a descrição"></app-message>
+        <app-message [control]="descricao" error="minlength"
+          text="Mínimo de {{ descricao.errors?.minlength?.requiredLength }} caracteres"></app-message>
+      </div>
+
+      <div class="ui-g-12 ui-md-4 ui-fluid">
+        <label>Número</label>
+        <input pInputText type="text" name="numero"
+        name="numero" [(ngModel)]="apartamento.numero"
+        #numero="ngModel" required maxlength="10" minlength="1">
+
+        <app-message [control]="numero" error="required"
+        text="Informe o número"></app-message>
+       <app-message [control]="numero" error="minlength"
+        text="Mínimo de {{ numero.errors?.minlength?.requiredLength }} caracteres"></app-message>
+      </div>
+
+      <div class="ui-g-12 ui-md-6 ui-fluid">
+        <label>Predios</label>
+        <p-dropdown name="predio" [options]="predios"
+          placeholder="Selecione" [autoWidth]="false"
+          [(ngModel)]="apartamento.predio.id"
+          required></p-dropdown>
+      </div>
+
+      <div class="ui-g-12 ui-md-6 ui-fluid">
+        <label>Medidor</label>
+        <input pInputText type="text" name="medidor"
+        name="medidor" [(ngModel)]="apartamento.medidor"
+        #medidor="ngModel" required maxlength="10" minlength="1">
+
+      </div>
+
+    </div>
+
+  </form>
+</div>

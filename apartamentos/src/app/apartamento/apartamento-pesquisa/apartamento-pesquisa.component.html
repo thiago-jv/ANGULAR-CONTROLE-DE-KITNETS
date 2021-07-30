@@ -1,0 +1,88 @@
+<div class="container">
+  <form autocomplete="off" (ngSubmit)="pesquisar()">
+  <div class="ui-g">
+      <div class="ui-g-12">
+      <h1>Apartamentos</h1>
+    </div>
+
+    <div class="ui-g-12 ui-md-4 ui-fluid">
+      <label>Apartamento</label>
+      <input pInputText type="text" name="descricao" [(ngModel)]="filtro.descricao">
+    </div>
+
+    <div class="ui-g-12 ui-md-4 ui-fluid">
+      <label>Número</label>
+      <input pInputText type="text" name="numero" [(ngModel)]="filtro.numero">
+    </div>
+
+    <div class="ui-g-12 ui-md-4 ui-fluid">
+      <label>Status</label>
+      <p-dropdown name="statusApartamento" [options]="statusApartamento"
+      [autoWidth]="false"
+      [(ngModel)]="filtro.statusApartamento"></p-dropdown>
+    </div>
+
+  </div>
+
+  <div class="ui-g">
+    <div class="ui-g-12" style="margin-top: 30px;">
+
+    <p-toolbar>
+      <div class="ui-toolbar-group-left">
+        <button pButton type="submit" label="Pesquisar"></button>
+      </div> 
+
+      <div class="ui-toolbar-group-right">
+        <a pButton label="Novo" routerLink="/apartamento"></a>
+      </div>
+    </p-toolbar>
+    </div>
+  </div>
+</form>
+
+  <div class="ui-g">
+    <div class="ui-g-12">
+
+   <p-table [value]="apartamentos" [paginator]="true" [rows]="filtro.intensPorPagina" [lazy]="true" [totalRecords]="totalRegistros"
+      (onLazyLoad)="aoMudarPagina($event)" [responsive]="true" emptyMessage="Nenhum apartamento encontrado"
+      #tabela>
+
+      <ng-template pTemplate="header">
+        <tr>
+          <th class="col-data-header">id</th>
+          <th class="col-valor-header">Predio</th>
+          <th class="col-valor-header">Descrição</th>
+          <th class="col-valor-header">Número</th>
+          <th class="col-valor-header">Medidor</th>
+          <th class="col-valor-header">Status</th>
+          <th class="col-acoes-header"></th>
+        </tr>
+      </ng-template>
+
+      <ng-template pTemplate="body" let-a>
+        <tr>
+          <td>{{ a.id }}</td>
+          <td>{{ a.predio.descricao}}</td>
+          <td>{{ a.descricao}}</td>
+          <td>{{ a.numero}}</td>
+          <td>{{ a.medidor}}</td>
+          <td [style.background-color]="a.statusApartamento === 'DISPONIVEL' ? 'green' : 'red'">{{ a.statusApartamento}}</td>
+          <td class="col-acoes">
+            <a pButton icon="fa fa-pencil" pTooltip="Editar"
+              tooltipPosition="top"
+              [routerLink]="['/apartamento', a.id]"></a>
+
+            <button pButton icon="fa fa-trash"
+              pTooltip="Excluir" tooltipPosition="top"
+              (click)="confirmarExclusao(a)"></button>
+          </td>
+        </tr>
+      </ng-template>
+
+    </p-table>
+
+  </div>
+  
+  </div>
+
+</div>

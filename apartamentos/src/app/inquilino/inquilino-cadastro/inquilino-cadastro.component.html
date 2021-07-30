@@ -1,0 +1,93 @@
+<div class="container">
+
+
+  
+  <form #f="ngForm" autocomplete="off" (ngSubmit)="salvar(f)">
+
+    <div class="ui-g">
+      <div class="ui-g-12">
+        <h1>{{ editando ? 'Edição de' : 'Novo' }} Inquilino</h1>
+      </div>
+    </div>
+
+      <div class="ui-g">
+        <div class="ui-g-12" style="margin-top: 10px;">
+    
+        <p-toolbar>
+          <div class="ui-toolbar-group-left">
+            <button pButton type="submit" label="Salvar" [disabled]="f.invalid"></button>
+            <button pButton type="button" label="Novo" class="ui-button-info" (click)="novo(f)"></button>
+          </div> 
+    
+          <div class="ui-toolbar-group-right">
+            <a pButton label="Pesquisar" routerLink="/inquilinos"></a>
+          </div>
+        </p-toolbar>
+        </div>
+      </div>
+
+      <div class="ui-g">
+      <div class="ui-g-12 ui-fluid">
+        <label>Nome</label>
+        <input pInputText type="text" name="nome" 
+        [(ngModel)]="inquilino.nome"
+        #nome="ngModel" required minlength="5" maxlength="90">
+
+        <app-message [control]="nome" error="required"
+        text="Informe o nome"></app-message>
+      <app-message [control]="nome" error="minlength"
+        text="Mínimo de {{ nome.errors?.minlength?.requiredLength }} caracteres"></app-message>
+      </div>
+
+      <div class="ui-g-12 ui-fluid">
+        <label>Nome Abreviado</label>
+        <input pInputText type="text" name="nomeAbreviado" 
+        [(ngModel)]="inquilino.nomeAbreviado"
+        #nomeAbreviado="ngModel" required minlength="5" maxlength="20">
+
+        <app-message [control]="nome" error="required"
+        text="Informe o nome"></app-message>
+      <app-message [control]="nome" error="minlength"
+        text="Mínimo de {{ nome.errors?.minlength?.requiredLength }} caracteres"></app-message>
+      </div>
+
+      <div class="ui-g-12 ui-md-6 ui-fluid">
+        <label>Genero</label>
+        <p-selectButton name="genero" [options]="generos"
+          [(ngModel)]="inquilino.genero"
+          #genero></p-selectButton>
+      </div>
+
+      <div class="ui-g-12 ui-md-6 ui-fluid">
+        <label>Status </label>
+        <p-selectButton id="status" name="status" [options]="status"
+          [(ngModel)]="inquilino.status" required></p-selectButton>
+      </div>
+
+      <div class="ui-g-12 ui-md-4 ui-fluid">
+        <label>Cpf</label>
+        <input pInputText type="text" name="cpf"
+        name="cpf" maxlength="11"
+        [(ngModel)]="inquilino.cpf"
+        #cpf="ngModel">
+      </div>
+
+      <div class="ui-g-12 ui-md-4 ui-fluid">
+        <label>E-mail</label>
+        <input  pInputText type="text" name="email"
+        name="email" maxlength="90" 
+        [(ngModel)]="inquilino.email"
+        #email="ngModel">
+      </div>
+
+      <div class="ui-g-12 ui-md-4 ui-fluid">
+        <label>Contato</label>
+        <input pInputText type="text" name="contato"
+        [(ngModel)]="inquilino.contato" maxlength="15"
+        #contato="ngModel">
+      </div>
+
+    </div>
+
+  </form>
+</div>
