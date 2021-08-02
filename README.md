@@ -1,7 +1,7 @@
 Projeto demonstrativo para controle de kitnets, utilizando Angular 6, NodeJs e Primeng 6.
 
 # Projeto Back-End
-Apos rodas os passos abaixo, rodar o front-end nesse link [FRONT-END](https://github.com/thiago-jv/API-CONTROLE-DE-KITNETS)
+Apos rodas os passos abaixo, rodar o back-end nesse link [BACK-END](https://github.com/thiago-jv/API-CONTROLE-DE-KITNETS)
 
 # Tela de controle de lançamentos
 ![FRONT-END](https://github.com/thiago-jv/UI-CONTROLE-DE-KITNETS/blob/main/controle.png)
