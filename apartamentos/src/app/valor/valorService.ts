@@ -6,7 +6,7 @@ import { Valor, ValorFiltro } from '../core/model';
 @Injectable()
 export class ValorService {
 
-valorUrl = 'http://localhost:8080/valores';
+valorUrl = 'http://localhost:8080/apartamentosapi/v1/valores';
 
 constructor(private http: Http) { }
 
@@ -52,8 +52,12 @@ listarTodas(): Promise<any> {
 
     return this.http.delete(`${this.valorUrl}/${id}`, { headers })
       .toPromise()
-      .then(() => null);
-  }
+      .then(response => null).catch(error => {
+        if(error.status == 409){
+          return Promise.reject("Valor de código " + `${id}` + " não pode ser removido, pois está em uso");
+        }});
+}
+
 
   adicionar(valor: Valor): Promise<Valor> {
     const headers = new Headers();

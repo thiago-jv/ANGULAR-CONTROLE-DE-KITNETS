@@ -24,7 +24,7 @@ export class Endereco {
     numero: string;
     medidor: string;
     statusApartamento: string;
-    predio = new Predio();
+    predio = new PredioId();
   }
 
   export class Inquilino {
@@ -36,6 +36,22 @@ export class Endereco {
     cpf: string;
     status: string;
     genero: string;
+  }
+
+  export class InquilinoId {
+    id: number;
+  }
+
+  export class ApartamentoId {
+    id: number;
+  }
+
+  export class PredioId {
+    id: number;
+  }
+
+  export class ValorId {
+    id: number;
   }
 
 
@@ -69,9 +85,9 @@ export class Endereco {
     observacao: string;
     status = new Status();
     valores = new Valores();
-    valor = new Valor();
-    inquilino = new Inquilino();
-    apartamento = new Apartamento();
+    valor = new ValorId();
+    inquilino = new InquilinoId();
+    apartamento = new ApartamentoId();
   }
 
 

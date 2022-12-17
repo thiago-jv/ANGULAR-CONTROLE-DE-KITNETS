@@ -6,7 +6,7 @@ import { Apartamento, ApartamentoFiltro } from '../core/model';
 @Injectable()
 export class ApartamentoService {
 
-  apartamentoUrl = 'http://localhost:8080/apartamentos';
+  apartamentoUrl = 'http://localhost:8080/apartamentosapi/v1/apartamentos';
 
   constructor(private http: Http) { }
 
@@ -69,7 +69,10 @@ export class ApartamentoService {
 
     return this.http.delete(`${this.apartamentoUrl}/${id}`, { headers })
       .toPromise()
-      .then(() => null);
+      .then(response => null).catch(error => {
+          if(error.status == 409){
+            return Promise.reject("Apartamento de código " + `${id}` + " não pode ser removida, pois está em uso");
+          }});
   }
 
   adicionar(apartamento: Apartamento): Promise<Apartamento> {

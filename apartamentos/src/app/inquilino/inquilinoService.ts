@@ -6,7 +6,7 @@ import { Inquilino, InquilinoFiltro } from '../core/model';
 @Injectable()
 export class InquilinoService {
 
-  inquilinoUrl = 'http://localhost:8080/inquilinos';
+  inquilinoUrl = 'http://localhost:8080/apartamentosapi/v1/inquilinos';
 
   constructor(private http: Http) { }
 
@@ -69,8 +69,11 @@ export class InquilinoService {
 
     return this.http.delete(`${this.inquilinoUrl}/${id}`, { headers })
       .toPromise()
-      .then(() => null);
-  }
+      .then(response => null).catch(error => {
+        if(error.status == 409){
+          return Promise.reject("Inquilino de código " + `${id}` + " não pode ser removido, pois está em uso");
+        }});
+}
 
   adicionar(inquilino: Inquilino): Promise<Inquilino> {
     const headers = new Headers();

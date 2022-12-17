@@ -6,7 +6,7 @@ import { Predio, PredioFiltro } from '../core/model';
 @Injectable()
 export class PredioService {
 
-  predioUrl = 'http://localhost:8080/predios';
+  predioUrl = 'http://localhost:8080/apartamentosapi/v1/predios';
 
   constructor(private http: Http) { }
 
@@ -52,8 +52,11 @@ export class PredioService {
 
     return this.http.delete(`${this.predioUrl}/${id}`, { headers })
       .toPromise()
-      .then(() => null);
-  }
+      .then(response => null).catch(error => {
+        if(error.status == 409){
+          return Promise.reject("Predio de código " + `${id}` + " não pode ser removido, pois está em uso");
+        }});
+}
 
   adicionar(predio: Predio): Promise<Predio> {
     const headers = new Headers();

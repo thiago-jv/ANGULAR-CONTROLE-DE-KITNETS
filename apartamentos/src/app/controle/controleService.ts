@@ -7,7 +7,7 @@ import * as moment from 'moment';
 @Injectable()
 export class ControleService {
 
-  controleUrl = 'http://localhost:8080/controles';
+  controleUrl = 'http://localhost:8080/apartamentosapi/v1/controles';
 
   constructor(private http: Http) { }
 
@@ -114,8 +114,12 @@ export class ControleService {
 
     return this.http.put(`${this.controleUrl}/${id}/status`, { headers })
       .toPromise()
-      .then(() => null);
-  }
+      .then(response => null).catch(error => {
+        if(error.status == 409){
+          return Promise.reject("Locação de código " + `${id}` + " não pode ser fechado, pois está em débito");
+        }});
+    }
+
 
   private converterStringsParaDatas(controles: ControleLancamento[]) {
     for (const controle of controles) {
