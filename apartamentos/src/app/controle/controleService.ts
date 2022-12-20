@@ -80,7 +80,11 @@ export class ControleService {
 
     return this.http.post(this.controleUrl, JSON.stringify(controle), { headers })
       .toPromise()
-      .then(response => response.json());
+      .then(response => response.json()).catch(error => {
+        if(error.status == 409){
+          return Promise.reject("Inquilino de id  " + `${controle.inquilino.id}` + " ou "+ "Apartamento de id " + `${controle.apartamento.id}` + " não pode ser usado, pois está em uso");
+        }
+      });
   }
 
   atualizar(controle: ControleLancamento): Promise<ControleLancamento> {

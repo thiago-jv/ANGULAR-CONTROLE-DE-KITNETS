@@ -133,7 +133,7 @@
         <label>R$ Informe valor pago pelo cliente</label>
           <input pInputText type="text" name="valorPagoApartamento" placeholder="0,00" style="background-color: chartreuse;"
           currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',', allowNegative: false }"
-          [(ngModel)]="controle.valores.valorPagoApartamento" [disabled]="controle.valores.valorPagoApartamento === undefined">
+          [(ngModel)]="controle.valores.valorPagoApartamento" required>
       </div>
 
       <div class="ui-g-12 ui-md-3 ui-fluid">
