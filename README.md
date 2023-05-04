@@ -1,4 +1,4 @@
-Projeto demonstrativo para controle de kitnets, utilizando Angular 6, NodeJs e Primeng 6.
+Projeto demonstrativo para controle de kitnets, utilizando Angular 6, NodeJs e Primeng 7.
 
 # Projeto Back-End
 Apos rodas os passos abaixo, rodar o back-end nesse link [BACK-END](https://github.com/thiago-jv/API-CONTROLE-DE-KITNETS)
