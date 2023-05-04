@@ -6,7 +6,7 @@ import { Apartamento, ApartamentoFiltro } from '../core/model';
 @Injectable()
 export class ApartamentoService {
 
-  apartamentoUrl = 'http://localhost:8080/apartamentosapi/v1/apartamentos';
+  apartamentoUrl = 'http://localhost:8089/apartamentosapi/v1/apartamentos';
 
   constructor(private http: Http) { }
 
@@ -14,10 +14,10 @@ export class ApartamentoService {
     const params = new URLSearchParams();
     const headers = new Headers();
     headers.append('Content-Type', 'application/json')
-  
+
     params.set('page', filtro.pagina.toString());
     params.set('size', filtro.intensPorPagina.toString());
-  
+
     if (filtro.descricao) {
       params.set('descricao', filtro.descricao);
     }
@@ -29,18 +29,18 @@ export class ApartamentoService {
     if (filtro.statusApartamento) {
       params.set('statusApartamento', filtro.statusApartamento);
     }
-  
+
     return this.http.get(`${this.apartamentoUrl}?pesquisar`, { headers, search: params })
       .toPromise()
       .then(response => {
         const responseJson = response.json();
         const apartamentos = responseJson.content;
-  
+
         const resultado = {
           apartamentos,
           total: responseJson.totalElements
         };
-  
+
         return resultado;
       })
   }

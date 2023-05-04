@@ -4,7 +4,7 @@ export class Endereco {
     bairro: string;
     cep: string;
   }
-  
+
   export class Predio {
     id: number;
     descricao: string;
@@ -15,7 +15,7 @@ export class Endereco {
     uf: string;
     localidade: string;
     numero: string;
-    
+
   }
 
   export class Apartamento {
@@ -90,6 +90,10 @@ export class Endereco {
     apartamento = new ApartamentoId();
   }
 
+  export class Diario {
+    id: number;
+    descricao: string;
+  }
 
   export class ValorFiltro {
     valor: string;
@@ -108,7 +112,7 @@ export class Endereco {
     numero: string;
     statusApartamento: string;
     pagina = 0;
-    intensPorPagina = 10;
+    intensPorPagina = 5;
   }
 
   export class InquilinoFiltro {
@@ -127,4 +131,10 @@ export class Endereco {
     dataPagamentoAte: Date;
     pagina = 0;
     intensPorPagina = 20;
+  }
+
+  export class DiarioFiltro {
+    descricao: string;
+    pagina = 0;
+    intensPorPagina = 10;
   }

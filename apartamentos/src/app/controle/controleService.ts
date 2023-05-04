@@ -7,7 +7,7 @@ import * as moment from 'moment';
 @Injectable()
 export class ControleService {
 
-  controleUrl = 'http://localhost:8080/apartamentosapi/v1/controles';
+  controleUrl = 'http://localhost:8089/apartamentosapi/v1/controles';
 
   constructor(private http: Http) { }
 
@@ -15,10 +15,10 @@ export class ControleService {
     const params = new URLSearchParams();
     const headers = new Headers();
     headers.append('Content-Type', 'application/json')
-  
+
     params.set('page', filtro.pagina.toString());
     params.set('size', filtro.intensPorPagina.toString());
-  
+
     if (filtro.dataPagamentoDe) {
       params.set('dataPagamentoDe',
         moment(filtro.dataPagamentoDe).format('YYYY-MM-DD'));
@@ -40,18 +40,18 @@ export class ControleService {
     if (filtro.statusApartamePagamentoLuz) {
       params.set('statusApartamePagamentoLuz', filtro.statusApartamePagamentoLuz);
     }
-  
+
     return this.http.get(`${this.controleUrl}?pesquisar`, { headers, search: params })
       .toPromise()
       .then(response => {
         const responseJson = response.json();
         const controles = responseJson.content;
-  
+
         const resultado = {
           controles,
           total: responseJson.totalElements
         };
-  
+
         return resultado;
       })
   }

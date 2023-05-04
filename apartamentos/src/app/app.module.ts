@@ -11,10 +11,11 @@ import { ValorModule } from './valor/valor.module';
 import { ControleModule } from './controle/controle.module';
 import { PredioModule } from './predio/predio.module';
 import { AppRoutingModule } from './appRoutingModule';
+import { DiarioModule } from './diario/diario.module';
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,
@@ -25,7 +26,8 @@ import { AppRoutingModule } from './appRoutingModule';
     InquilinoModule,
     ValorModule,
     ControleModule,
-    
+    DiarioModule,
+
     CoreModule,
     AppRoutingModule,
     HttpModule,

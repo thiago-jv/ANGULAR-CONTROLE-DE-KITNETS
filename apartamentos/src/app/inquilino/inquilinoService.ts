@@ -6,7 +6,7 @@ import { Inquilino, InquilinoFiltro } from '../core/model';
 @Injectable()
 export class InquilinoService {
 
-  inquilinoUrl = 'http://localhost:8080/apartamentosapi/v1/inquilinos';
+  inquilinoUrl = 'http://localhost:8089/apartamentosapi/v1/inquilinos';
 
   constructor(private http: Http) { }
 

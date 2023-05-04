@@ -21,7 +21,7 @@
     <div class="ui-g-12 ui-md-4 ui-fluid">
       <label>Pagou?</label>
       <p-dropdown name="statusApartamePagamento" [options]="statusApartamePagamento"
-      [autoWidth]="false" 
+      [autoWidth]="false"
       [(ngModel)]="filtro.statusApartamePagamento"></p-dropdown>
     </div>
 
@@ -47,7 +47,7 @@
     <p-toolbar>
       <div class="ui-toolbar-group-left">
         <button pButton type="submit" label="Pesquisar"></button>
-      </div> 
+      </div>
 
       <div class="ui-toolbar-group-right">
         <a pButton label="Novo" routerLink="/controle"></a>
@@ -60,8 +60,8 @@
   <div class="ui-g">
     <div class="ui-g-12">
 
-   <p-table [value]="controles" [paginator]="true" [rows]="filtro.intensPorPagina" [lazy]="true" [totalRecords]="totalRegistros"
-      (onLazyLoad)="aoMudarPagina($event)" [responsive]="true" emptyMessage="Nenhum apartamento encontrado"
+   <p-table [value]="controles" [rows]="filtro.intensPorPagina" [totalRecords]="totalRegistros"
+      (onLazyLoad)="aoMudarPagina($event)" [lazy]="true" [paginator]="true" [responsive]="true" emptyMessage="Nenhum apartamento encontrado"
       #tabela >
 
       <ng-template pTemplate="header">
@@ -90,7 +90,7 @@
           <td>{{ c.id}}</td>
           <td>{{ c.inquilino.nomeAbreviado}}</td>
           <td >{{ c.apartamento.descricao}}</td>
-          
+
           <td >{{ c.apartamento.medidor}}</td>
           <td >{{ c.dataEntrada | date:'dd/MM/yyyy'}}</td>
           <td >{{ c.dataPagamento | date:'dd/MM/yyyy'}}</td>
@@ -101,7 +101,7 @@
           <td [style.background-color]="c.status.statusProximoPagamento === 'PAGO' ? 'green' : 'red'">{{ c.status.statusProximoPagamento}}</td>
           <td [style.background-color]="c.status.entragaContaLuz === 'SIM' ? 'green' : 'red'">{{ c.status.entragaContaLuz}}</td>
           <td [style.background-color]="c.status.statusApartamePagamentoLuz === 'PAGO' ? 'green' : 'red'">{{ c.status.statusApartamePagamentoLuz}}</td>
-          <td> 
+          <td>
           <a href="javascript:;"
                 [pTooltip]="c.status.statusControle ? 'Aberto' : 'Fechado'"
                 tooltipPosition="top"

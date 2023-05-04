@@ -8,6 +8,7 @@ const routes: Routes = [
   { path: 'inquilino', loadChildren: 'app/inquilino/inquilino.module#InquilinoModule' },
   { path: 'valor', loadChildren: 'app/valor/valor.module#ValorModule' },
   { path: 'controle', loadChildren: 'app/controle/controle.module#ControleModule' },
+  { path: 'diario', loadChildren: 'app/diario/diario.module#DiarioModule' },
   { path: '**', redirectTo: 'pagina-nao-encontrada' }
 ];
 

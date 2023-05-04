@@ -7,8 +7,6 @@ import { ToastyConfig } from 'ng2-toasty';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  
-  
 
   constructor(private toastyConfig: ToastyConfig){
     this.toastyConfig.theme = 'bootstrap';

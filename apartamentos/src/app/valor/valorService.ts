@@ -6,7 +6,7 @@ import { Valor, ValorFiltro } from '../core/model';
 @Injectable()
 export class ValorService {
 
-valorUrl = 'http://localhost:8080/apartamentosapi/v1/valores';
+valorUrl = 'http://localhost:8089/apartamentosapi/v1/valores';
 
 constructor(private http: Http) { }
 

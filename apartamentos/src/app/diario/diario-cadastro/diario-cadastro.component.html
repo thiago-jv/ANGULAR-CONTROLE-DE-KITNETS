@@ -1,0 +1,37 @@
+<div class="container">
+  <form #f="ngForm" autocomplete="off" (ngSubmit)="salvar(f)">
+
+    <div class="ui-g">
+      <div class="ui-g-12">
+        <h1>{{ editando ? 'Edição de' : 'Novo' }} Diario</h1>
+      </div>
+    </div>
+
+    <div class="ui-g">
+      <div class="ui-g-12" style="margin-top: 10px;">
+
+        <p-toolbar>
+          <div class="ui-toolbar-group-left">
+            <button pButton type="submit" label="Salvar" [disabled]="f.invalid"></button>
+            <button pButton type="button" label="Novo" class="ui-button-info" (click)="novo(f)"></button>
+          </div>
+
+          <div class="ui-toolbar-group-right">
+            <a pButton label="Pesquisar" routerLink="/diarios"></a>
+          </div>
+        </p-toolbar>
+      </div>
+    </div>
+
+    <div class="ui-g">
+
+      <div class="ui-g-12 ui-fluid">
+        <label>Descrição</label>
+          <input pInputText type="text" name="descricao" [(ngModel)]="diario.descricao"
+          required>
+      </div>
+
+    </div>
+
+  </form>
+</div>

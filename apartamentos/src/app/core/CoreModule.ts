@@ -19,6 +19,7 @@ import { ControleService } from '../controle/controleService';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import {MenuModule} from 'primeng/menu';
 import {MenubarModule} from 'primeng/menubar';
+import { DiarioService } from '../diario/diario.service';
 
 registerLocaleData(localePt);
 
@@ -32,7 +33,9 @@ registerLocaleData(localePt);
     ToastyModule.forRoot(),
 
   ],
-  declarations: [NavbarComponent, PaginaNaoEncontradaComponent],
+  declarations: [
+    NavbarComponent,
+    PaginaNaoEncontradaComponent],
   exports: [
     NavbarComponent,
     ToastyModule,
@@ -46,6 +49,7 @@ registerLocaleData(localePt);
     InquilinoService,
     ValorService,
     ControleService,
+    DiarioService,
 
     Title,
     { provide: LOCALE_ID, useValue: 'pt' }
