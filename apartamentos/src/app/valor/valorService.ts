@@ -1,19 +1,18 @@
-import { Http, Headers, URLSearchParams } from '@angular/http';
+import { Headers, URLSearchParams } from '@angular/http';
 import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/toPromise';
 import { Valor, ValorFiltro } from '../core/model';
+import {AuthHttp} from 'angular2-jwt';
 
 @Injectable()
 export class ValorService {
 
 valorUrl = 'http://localhost:8089/apartamentosapi/v1/valores';
 
-constructor(private http: Http) { }
+constructor(private http: AuthHttp) { }
 
-pequisar(filtro: ValorFiltro): Promise<any>{
+pequisar(filtro: ValorFiltro): Promise<any> {
   const params = new URLSearchParams();
-  const headers = new Headers();
-  headers.append('Content-Type', 'application/json')
 
   params.set('page', filtro.pagina.toString());
   params.set('size', filtro.intensPorPagina.toString());
@@ -22,7 +21,7 @@ pequisar(filtro: ValorFiltro): Promise<any>{
     params.set('valor', filtro.valor);
   }
 
-  return this.http.get(`${this.valorUrl}?pesquisar`, { headers, search: params })
+  return this.http.get(`${this.valorUrl}?pesquisar`, { search: params })
     .toPromise()
     .then(response => {
       const responseJson = response.json();
@@ -38,19 +37,15 @@ pequisar(filtro: ValorFiltro): Promise<any>{
 }
 
 listarTodas(): Promise<any> {
-  const headers = new Headers();
-  headers.append('Content-Type', 'application/json');
 
-  return this.http.get(`${this.valorUrl}/todos`, { headers })
+  return this.http.get(`${this.valorUrl}/todos`)
     .toPromise()
     .then(response => response.json());
 }
 
   excluir(id: number): Promise<void> {
-    const headers = new Headers();
-    headers.append('Content-Type', 'application/json');
 
-    return this.http.delete(`${this.valorUrl}/${id}`, { headers })
+    return this.http.delete(`${this.valorUrl}/${id}`)
       .toPromise()
       .then(response => null).catch(error => {
         if(error.status == 409){
@@ -60,29 +55,23 @@ listarTodas(): Promise<any> {
 
 
   adicionar(valor: Valor): Promise<Valor> {
-    const headers = new Headers();
-    headers.append('Content-Type', 'application/json');
 
-    return this.http.post(this.valorUrl, JSON.stringify(valor), { headers })
+    return this.http.post(this.valorUrl, JSON.stringify(valor))
       .toPromise()
       .then(response => response.json());
   }
 
   atualizar(valor: Valor): Promise<Valor> {
-    const headers = new Headers();
-    headers.append('Content-Type', 'application/json');
 
     return this.http.put(`${this.valorUrl}/${valor.id}`,
-        JSON.stringify(valor), { headers })
+        JSON.stringify(valor))
       .toPromise()
       .then(response => response.json() as Valor);
   }
 
   buscarPorCodigo(id: number): Promise<Valor> {
-    const headers = new Headers();
-    headers.append('Content-Type', 'application/json');
 
-    return this.http.get(`${this.valorUrl}/${id}`, { headers })
+    return this.http.get(`${this.valorUrl}/${id}`)
       .toPromise()
       .then(response => response.json() as Valor);
   }

@@ -1,15 +1,66 @@
-<nav class="navbar">
+<nav class="navbar" xmlns="http://www.w3.org/1999/html">
 
   <div class="container">
     <div class="ui-g">
       <div class="ui-g-12">
-
-        <p-menubar [model]="items"></p-menubar>
-      
+        <a href="javascript:;" class="navbar-toggle" (click)="exibindoMenu = !exibindoMenu"><i class="fa fa-bars"></i></a>
       </div>
-
     </div>
-
   </div>
+
+  <ul class="navbar-menu" [hidden]="!exibindoMenu">
+    <li class="navbar-usuario">{{ auth.jwtPayload?.user_name }}</li>
+
+    <!-- diario -->
+    <li class="navbar-menuitem" routerLinkActive="ativo"
+        *ngIf="auth.temPermissao('ROLE_DIARIO')"><a routerLink="/diario">Cadastro Diário</a></li>
+
+    <li class="navbar-menuitem" routerLinkActive="ativo"
+        *ngIf="auth.temPermissao('ROLE_DIARIO')"><a routerLink="/diarios">Lista Diário</a></li>
+    <!-- diario -->
+
+    <!-- inquilino -->
+    <li class="navbar-menuitem" routerLinkActive="ativo"
+        *ngIf="auth.temPermissao('ROLE_INQUILINO')"><a routerLink="/inquilino">Cadastro Inquilino</a></li>
+
+    <li class="navbar-menuitem" routerLinkActive="ativo"
+        *ngIf="auth.temPermissao('ROLE_INQUILINO')"><a routerLink="/inquilinos">Lista Inquilino</a></li>
+    <!-- inquilino -->
+
+    <!-- predio -->
+    <li class="navbar-menuitem" routerLinkActive="ativo"
+        *ngIf="auth.temPermissao('ROLE_PREDIO')"><a routerLink="/predio">Cadastro Predio</a></li>
+
+    <li class="navbar-menuitem" routerLinkActive="ativo"
+        *ngIf="auth.temPermissao('ROLE_PREDIO')"><a routerLink="/predios">Lista Predio</a></li>
+    <!-- predio -->
+
+    <!-- apartamento -->
+    <li class="navbar-menuitem" routerLinkActive="ativo"
+        *ngIf="auth.temPermissao('ROLE_APARTAMENTO')"><a routerLink="/apartamento">Cadastro Apartamento</a></li>
+
+    <li class="navbar-menuitem" routerLinkActive="ativo"
+        *ngIf="auth.temPermissao('ROLE_APARTAMENTO')"><a routerLink="/apartamentos">Lista Apartamento</a></li>
+    <!-- apartamento -->
+
+    <!-- valor -->
+    <li class="navbar-menuitem" routerLinkActive="ativo"
+        *ngIf="auth.temPermissao('ROLE_VALOR')"><a routerLink="/valor">Cadastro Valor</a></li>
+
+    <li class="navbar-menuitem" routerLinkActive="ativo"
+        *ngIf="auth.temPermissao('ROLE_VALOR')"><a routerLink="/valores">Lista Valor</a></li>
+    <!-- valor -->
+
+    <!-- controle -->
+    <li class="navbar-menuitem" routerLinkActive="ativo"
+        *ngIf="auth.temPermissao('ROLE_LANCAMENTO')"><a routerLink="/controle">Cadastro Controle</a></li>
+
+    <li class="navbar-menuitem" routerLinkActive="ativo"
+        *ngIf="auth.temPermissao('ROLE_LANCAMENTO')"><a routerLink="/controles">Lista Controle</a></li>
+    <!-- controle -->
+
+    <li class="navbar-menuitem"><a href="#">Logout</a></li>
+
+  </ul>
 
 </nav>

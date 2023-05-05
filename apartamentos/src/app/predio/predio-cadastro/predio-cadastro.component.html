@@ -1,6 +1,6 @@
 <div class="container">
     <form #f="ngForm" autocomplete="off" (ngSubmit)="salvar(f)">
-  
+
       <div class="ui-g">
         <div class="ui-g-12">
           <h1>{{ editando ? 'Edição de' : 'Novo' }} Predio</h1>
@@ -9,13 +9,13 @@
 
       <div class="ui-g">
         <div class="ui-g-12" style="margin-top: 10px;">
-    
+
         <p-toolbar>
           <div class="ui-toolbar-group-left">
             <button pButton type="submit" label="Salvar" [disabled]="f.invalid"></button>
             <button pButton type="button" label="Novo" class="ui-button-info" (click)="novo(f)"></button>
-          </div> 
-    
+          </div>
+
           <div class="ui-toolbar-group-right">
             <a pButton label="Pesquisar" routerLink="/predios"></a>
           </div>
@@ -23,10 +23,10 @@
         </div>
       </div>
 
-      <div class="ui-g">  
+      <div class="ui-g">
         <div class="ui-g-12 ui-fluid">
           <label>Descricao</label>
-          <input pInputText type="text" name="descricao" 
+          <input pInputText type="text" name="descricao"
           [(ngModel)]="predio.descricao"
           #descricao="ngModel" required minlength="10">
 
@@ -41,12 +41,12 @@
           <p-inputMask  [(ngModel)]="predio.cep" type="text" name="cep" #cep="ngModel" mask="99999-999"></p-inputMask>
         </div>
 
-        
+
         <div class="ui-g-12 ui-md-8 ui-fluid">
           <label>Busca por cep:</label>
           <button pButton type="button" label="Buscar" class="ui-button-info" (click)="carregarPorCep(predio.cep)"></button>
         </div>
-  
+
         <div class="ui-g-4 ui-md-4 ui-fluid">
           <label>Logradouro</label>
           <input pInputText type="text" name="logradouro"
@@ -82,10 +82,10 @@
           <label>Uf</label>
           <input pInputText type="text" name="uf"
           name="uf"
-          [(ngModel)]="predio.localidade"
+          [(ngModel)]="predio.uf"
           #uf="ngModel">
         </div>
-  
+
         <div class="ui-g-12 ui-md-4 ui-fluid">
           <label>Número</label>
           <input pInputText type="text" name="numero"
@@ -93,11 +93,10 @@
           [(ngModel)]="predio.numero"
           #numero="ngModel">
         </div>
-  
-       
-  
+
+
+
       </div>
-  
+
     </form>
   </div>
-  

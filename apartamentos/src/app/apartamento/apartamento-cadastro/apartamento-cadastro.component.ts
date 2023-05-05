@@ -35,7 +35,7 @@ export class ApartamentoCadastroComponent implements OnInit {
   ngOnInit() {
     console.log(this.route.snapshot.params['id']);
     const idpartamento = this.route.snapshot.params['id'];
-    this.title.setTitle('Novo apartamento')
+    this.title.setTitle('Novo apartamento');
     this.carregarPredios();
 
     if(idpartamento){
@@ -57,7 +57,7 @@ export class ApartamentoCadastroComponent implements OnInit {
   }
 
   get editando(){
-    return Boolean(this.apartamento.id)
+    return Boolean(this.apartamento.id);
   }
 
   carregarApartamento(id: number) {

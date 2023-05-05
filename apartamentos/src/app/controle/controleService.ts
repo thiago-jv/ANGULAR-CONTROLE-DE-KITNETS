@@ -1,20 +1,19 @@
-import { Http, Headers, URLSearchParams } from '@angular/http';
+import { Headers, URLSearchParams } from '@angular/http';
 import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/toPromise';
 import { ControleFiltro, ControleLancamento } from '../core/model';
 import * as moment from 'moment';
+import {AuthHttp} from 'angular2-jwt';
 
 @Injectable()
 export class ControleService {
 
   controleUrl = 'http://localhost:8089/apartamentosapi/v1/controles';
 
-  constructor(private http: Http) { }
+  constructor(private http: AuthHttp) { }
 
-  pequisar(filtro: ControleFiltro): Promise<any>{
+  pequisar(filtro: ControleFiltro): Promise<any> {
     const params = new URLSearchParams();
-    const headers = new Headers();
-    headers.append('Content-Type', 'application/json')
 
     params.set('page', filtro.pagina.toString());
     params.set('size', filtro.intensPorPagina.toString());
@@ -41,7 +40,7 @@ export class ControleService {
       params.set('statusApartamePagamentoLuz', filtro.statusApartamePagamentoLuz);
     }
 
-    return this.http.get(`${this.controleUrl}?pesquisar`, { headers, search: params })
+    return this.http.get(`${this.controleUrl}?pesquisar`, { search: params })
       .toPromise()
       .then(response => {
         const responseJson = response.json();
@@ -53,32 +52,26 @@ export class ControleService {
         };
 
         return resultado;
-      })
+      });
   }
 
   listarTodas(): Promise<ControleLancamento> {
-    const headers = new Headers();
-    headers.append('Content-Type', 'application/json');
 
-    return this.http.get(`${this.controleUrl}/todos`, { headers })
+    return this.http.get(`${this.controleUrl}/todos`)
       .toPromise()
       .then(response => response.json());
   }
 
   excluir(id: number): Promise<void> {
-    const headers = new Headers();
-    headers.append('Content-Type', 'application/json');
 
-    return this.http.delete(`${this.controleUrl}/${id}`, { headers })
+    return this.http.delete(`${this.controleUrl}/${id}`)
       .toPromise()
       .then(() => null);
   }
 
   adicionar(controle: ControleLancamento): Promise<ControleLancamento> {
-    const headers = new Headers();
-    headers.append('Content-Type', 'application/json');
 
-    return this.http.post(this.controleUrl, JSON.stringify(controle), { headers })
+    return this.http.post(this.controleUrl, JSON.stringify(controle))
       .toPromise()
       .then(response => response.json()).catch(error => {
         if(error.status == 409){
@@ -88,20 +81,16 @@ export class ControleService {
   }
 
   atualizar(controle: ControleLancamento): Promise<ControleLancamento> {
-    const headers = new Headers();
-    headers.append('Content-Type', 'application/json');
 
     return this.http.put(`${this.controleUrl}/${controle.id}`,
-        JSON.stringify(controle), { headers })
+        JSON.stringify(controle))
       .toPromise()
       .then(response => response.json() as ControleLancamento);
   }
 
   buscarPorCodigo(id: number): Promise<ControleLancamento> {
-    const headers = new Headers();
-    headers.append('Content-Type', 'application/json');
 
-    return this.http.get(`${this.controleUrl}/${id}`, { headers })
+    return this.http.get(`${this.controleUrl}/${id}`)
       .toPromise()
       .then(response => {
         const controle = response.json() as ControleLancamento;
@@ -116,7 +105,7 @@ export class ControleService {
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
 
-    return this.http.put(`${this.controleUrl}/${id}/status`, { headers })
+    return this.http.put(`${this.controleUrl}/${id}/status`, {headers})
       .toPromise()
       .then(response => null).catch(error => {
         if(error.status == 409){

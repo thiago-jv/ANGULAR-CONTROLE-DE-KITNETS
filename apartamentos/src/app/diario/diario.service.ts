@@ -1,19 +1,18 @@
-import { Http, Headers, URLSearchParams } from '@angular/http';
+import {Headers, URLSearchParams } from '@angular/http';
 import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/toPromise';
 import { Diario, DiarioFiltro } from '../core/model';
+import {AuthHttp} from 'angular2-jwt';
 
 @Injectable()
 export class DiarioService {
 
   diarioUrl = 'http://localhost:8089/apartamentosapi/v1/diarios';
 
-  constructor(private http: Http) { }
+  constructor(private http: AuthHttp) { }
 
   pesquisar(filtro: DiarioFiltro): Promise<any> {
     const params = new URLSearchParams();
-    const headers = new Headers();
-    headers.append('Content-Type', 'application/json')
 
     params.set('page', filtro.pagina.toString());
     params.set('size', filtro.intensPorPagina.toString());
@@ -22,7 +21,7 @@ export class DiarioService {
       params.set('descricao', filtro.descricao);
     }
 
-    return this.http.get(`${this.diarioUrl}`, { headers, search: params })
+    return this.http.get(`${this.diarioUrl}`, { search: params })
     .toPromise()
     .then(response => {
       const responseJson = response.json();
@@ -34,14 +33,12 @@ export class DiarioService {
       };
 
       return resultado;
-    })
+    });
   }
 
   adicionar(diario: Diario): Promise<Diario> {
-    const headers = new Headers();
-    headers.append('Content-Type', 'application/json');
 
-    return this.http.post(this.diarioUrl, JSON.stringify(diario), { headers })
+    return this.http.post(this.diarioUrl, JSON.stringify(diario))
       .toPromise()
       .then(response => response.json());
   }

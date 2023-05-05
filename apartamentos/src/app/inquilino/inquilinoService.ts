@@ -2,18 +2,17 @@ import { Http, Headers, URLSearchParams } from '@angular/http';
 import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/toPromise';
 import { Inquilino, InquilinoFiltro } from '../core/model';
+import {AuthHttp} from 'angular2-jwt';
 
 @Injectable()
 export class InquilinoService {
 
   inquilinoUrl = 'http://localhost:8089/apartamentosapi/v1/inquilinos';
 
-  constructor(private http: Http) { }
+  constructor(private http: AuthHttp) { }
 
   pequisar(filtro: InquilinoFiltro): Promise<any>{
     const params = new URLSearchParams();
-    const headers = new Headers();
-    headers.append('Content-Type', 'application/json')
 
     params.set('page', filtro.pagina.toString());
     params.set('size', filtro.intensPorPagina.toString());
@@ -30,7 +29,7 @@ export class InquilinoService {
       params.set('status', filtro.status);
     }
 
-    return this.http.get(`${this.inquilinoUrl}?pesquisar`, { headers, search: params })
+    return this.http.get(`${this.inquilinoUrl}?pesquisar`, { search: params })
       .toPromise()
       .then(response => {
         const responseJson = response.json();
@@ -46,28 +45,22 @@ export class InquilinoService {
   }
 
   listarTodas(): Promise<Inquilino> {
-    const headers = new Headers();
-    headers.append('Content-Type', 'application/json');
 
-    return this.http.get(`${this.inquilinoUrl}/todos`, { headers })
+    return this.http.get(`${this.inquilinoUrl}/todos`)
       .toPromise()
       .then(response => response.json());
   }
 
   listarTodosAtivos(): Promise<any> {
-    const headers = new Headers();
-    headers.append('Content-Type', 'application/json');
 
-    return this.http.get(`${this.inquilinoUrl}/todos/ativos`, { headers })
+    return this.http.get(`${this.inquilinoUrl}/todos/ativos`)
       .toPromise()
       .then(response => response.json());
   }
 
   excluir(id: number): Promise<void> {
-    const headers = new Headers();
-    headers.append('Content-Type', 'application/json');
 
-    return this.http.delete(`${this.inquilinoUrl}/${id}`, { headers })
+    return this.http.delete(`${this.inquilinoUrl}/${id}`)
       .toPromise()
       .then(response => null).catch(error => {
         if(error.status == 409){
@@ -76,29 +69,23 @@ export class InquilinoService {
 }
 
   adicionar(inquilino: Inquilino): Promise<Inquilino> {
-    const headers = new Headers();
-    headers.append('Content-Type', 'application/json');
 
-    return this.http.post(this.inquilinoUrl, JSON.stringify(inquilino), { headers })
+    return this.http.post(this.inquilinoUrl, JSON.stringify(inquilino))
       .toPromise()
       .then(response => response.json());
   }
 
   atualizar(inquilino: Inquilino): Promise<Inquilino> {
-    const headers = new Headers();
-    headers.append('Content-Type', 'application/json');
 
     return this.http.put(`${this.inquilinoUrl}/${inquilino.id}`,
-        JSON.stringify(inquilino), { headers })
+        JSON.stringify(inquilino))
       .toPromise()
       .then(response => response.json() as Inquilino);
   }
 
   buscarPorCodigo(id: number): Promise<Inquilino> {
-    const headers = new Headers();
-    headers.append('Content-Type', 'application/json');
 
-    return this.http.get(`${this.inquilinoUrl}/${id}`, { headers })
+    return this.http.get(`${this.inquilinoUrl}/${id}`)
       .toPromise()
       .then(response => response.json() as Inquilino);
   }

@@ -21,7 +21,7 @@ export class Endereco {
   export class Apartamento {
     id: number;
     descricao: string;
-    numero: string;
+    numeroApartamento: string;
     medidor: string;
     statusApartamento: string;
     predio = new PredioId();

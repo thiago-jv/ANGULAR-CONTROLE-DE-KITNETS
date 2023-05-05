@@ -1,19 +1,18 @@
-import { Http, Headers, URLSearchParams } from '@angular/http';
+import { Headers, URLSearchParams } from '@angular/http';
 import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/toPromise';
 import { Apartamento, ApartamentoFiltro } from '../core/model';
+import {AuthHttp} from 'angular2-jwt';
 
 @Injectable()
 export class ApartamentoService {
 
   apartamentoUrl = 'http://localhost:8089/apartamentosapi/v1/apartamentos';
 
-  constructor(private http: Http) { }
+  constructor(private http: AuthHttp) { }
 
-  pequisar(filtro: ApartamentoFiltro): Promise<any>{
+  pequisar(filtro: ApartamentoFiltro): Promise<any> {
     const params = new URLSearchParams();
-    const headers = new Headers();
-    headers.append('Content-Type', 'application/json')
 
     params.set('page', filtro.pagina.toString());
     params.set('size', filtro.intensPorPagina.toString());
@@ -30,7 +29,7 @@ export class ApartamentoService {
       params.set('statusApartamento', filtro.statusApartamento);
     }
 
-    return this.http.get(`${this.apartamentoUrl}?pesquisar`, { headers, search: params })
+    return this.http.get(`${this.apartamentoUrl}?pesquisar`, { search: params })
       .toPromise()
       .then(response => {
         const responseJson = response.json();
@@ -42,32 +41,19 @@ export class ApartamentoService {
         };
 
         return resultado;
-      })
-  }
-
-  listarTodas(): Promise<Apartamento> {
-    const headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-
-    return this.http.get(`${this.apartamentoUrl}/todos`, { headers })
-      .toPromise()
-      .then(response => response.json());
+      });
   }
 
   listarTodosDisponiveis(): Promise<any> {
-    const headers = new Headers();
-    headers.append('Content-Type', 'application/json');
 
-    return this.http.get(`${this.apartamentoUrl}/todos/disponiveis`, { headers })
+    return this.http.get(`${this.apartamentoUrl}/todos/disponiveis`)
       .toPromise()
       .then(response => response.json());
   }
 
   excluir(id: number): Promise<void> {
-    const headers = new Headers();
-    headers.append('Content-Type', 'application/json');
 
-    return this.http.delete(`${this.apartamentoUrl}/${id}`, { headers })
+    return this.http.delete(`${this.apartamentoUrl}/${id}`)
       .toPromise()
       .then(response => null).catch(error => {
           if(error.status == 409){
@@ -76,29 +62,23 @@ export class ApartamentoService {
   }
 
   adicionar(apartamento: Apartamento): Promise<Apartamento> {
-    const headers = new Headers();
-    headers.append('Content-Type', 'application/json');
 
-    return this.http.post(this.apartamentoUrl, JSON.stringify(apartamento), { headers })
+    return this.http.post(this.apartamentoUrl, JSON.stringify(apartamento))
       .toPromise()
       .then(response => response.json());
   }
 
   atualizar(apartamento: Apartamento): Promise<Apartamento> {
-    const headers = new Headers();
-    headers.append('Content-Type', 'application/json');
 
     return this.http.put(`${this.apartamentoUrl}/${apartamento.id}`,
-        JSON.stringify(apartamento), { headers })
+        JSON.stringify(apartamento))
       .toPromise()
       .then(response => response.json() as Apartamento);
   }
 
   buscarPorCodigo(id: number): Promise<Apartamento> {
-    const headers = new Headers();
-    headers.append('Content-Type', 'application/json');
 
-    return this.http.get(`${this.apartamentoUrl}/${id}`, { headers })
+    return this.http.get(`${this.apartamentoUrl}/${id}`)
       .toPromise()
       .then(response => response.json() as Apartamento);
   }

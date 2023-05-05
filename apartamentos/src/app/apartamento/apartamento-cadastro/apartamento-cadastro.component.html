@@ -10,13 +10,13 @@
 
     <div class="ui-g">
       <div class="ui-g-12" style="margin-top: 10px;">
-  
+
       <p-toolbar>
         <div class="ui-toolbar-group-left">
           <button pButton type="submit" label="Salvar" [disabled]="f.invalid"></button>
           <button pButton type="button" label="Novo" class="ui-button-info" (click)="novo(f)"></button>
-        </div> 
-  
+        </div>
+
         <div class="ui-toolbar-group-right">
           <a pButton label="Pesquisar" routerLink="/apartamentos"></a>
         </div>
@@ -40,14 +40,14 @@
 
       <div class="ui-g-12 ui-md-4 ui-fluid">
         <label>Número</label>
-        <input pInputText type="text" name="numero"
-        name="numero" [(ngModel)]="apartamento.numero"
-        #numero="ngModel" required maxlength="10" minlength="1">
+        <input pInputText type="text" name="numeroApartamento"
+        name="numeroApartamento" [(ngModel)]="apartamento.numeroApartamento"
+        #numeroApartamento="ngModel" required maxlength="10" minlength="1">
 
-        <app-message [control]="numero" error="required"
+        <app-message [control]="numeroApartamento" error="required"
         text="Informe o número"></app-message>
-       <app-message [control]="numero" error="minlength"
-        text="Mínimo de {{ numero.errors?.minlength?.requiredLength }} caracteres"></app-message>
+       <app-message [control]="numeroApartamento" error="minlength"
+        text="Mínimo de {{ numeroApartamento.errors?.minlength?.requiredLength }} caracteres"></app-message>
       </div>
 
       <div class="ui-g-12 ui-md-6 ui-fluid">
