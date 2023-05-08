@@ -10,6 +10,7 @@
 
   <ul class="navbar-menu" [hidden]="!exibindoMenu">
     <li class="navbar-usuario">{{ auth.jwtPayload?.user_name }}</li>
+    <button type="button" (click)="criarNovoAccessToken()">Novo access token</button>
 
     <!-- diario -->
     <li class="navbar-menuitem" routerLinkActive="ativo"
