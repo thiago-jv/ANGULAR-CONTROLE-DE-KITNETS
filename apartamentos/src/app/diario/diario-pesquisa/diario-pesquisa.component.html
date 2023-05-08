@@ -1,60 +1,61 @@
 <div class="container">
   <form autocomplete="off" (ngSubmit)="pesquisar()">
 
-  <div class="ui-g">
-    <div class="ui-g-12">
-      <h1>Diários</h1>
-    </div>
-
-    <div class="ui-g-12 ui-fluid">
-      <label>Descrição</label>
-      <input pInputText type="text" name="descricao" [(ngModel)]="filtro.descricao">
-    </div>
-  </div>
-
-  <div class="ui-g">
-    <div class="ui-g-12" style="margin-top: 30px;">
-
-    <p-toolbar>
-      <div class="ui-toolbar-group-left">
-        <button pButton type="submit" label="Pesquisar"></button>
+    <div class="ui-g">
+      <div class="ui-g-12">
+        <h1>Diários</h1>
       </div>
-    </p-toolbar>
+
+      <div class="ui-g-12 ui-fluid">
+        <label>Descrição</label>
+        <input pInputText type="text" name="descricao" [(ngModel)]="filtro.descricao">
+      </div>
     </div>
-  </div>
-</form>
+
+    <div class="ui-g">
+      <div class="ui-g-12" style="margin-top: 30px;">
+
+        <p-toolbar>
+          <div class="ui-toolbar-group-left">
+            <button pButton type="submit" label="Pesquisar"></button>
+          </div>
+        </p-toolbar>
+      </div>
+    </div>
+  </form>
 
   <div class="ui-g">
     <div class="ui-g-12">
 
-   <p-table [value]="diarios" emptyMessage="Nenhum valor encontrado" [lazy]="true" [paginator]="true"
-   [responsive]="true" [rows]="filtro.intensPorPagina" [totalRecords]="totalRegistros" (onLazyLoad)="aoMudarPagina($event)">
+      <p-table [value]="diarios" emptyMessage="Nenhum valor encontrado" [lazy]="true" [paginator]="true"
+               [responsive]="true" [rows]="filtro.intensPorPagina" [totalRecords]="totalRegistros"
+               (onLazyLoad)="aoMudarPagina($event)">
 
-      <ng-template pTemplate="header">
-        <tr>
-          <th class="col-data-header">id</th>
-          <th class="col-valor-header">Descriçao</th>
-          <th class="col-acoes"></th>
-        </tr>
-      </ng-template>
+        <ng-template pTemplate="header">
+          <tr>
+            <th class="col-data-header">id</th>
+            <th class="col-valor-header">Descriçao</th>
+            <th class="col-acoes"></th>
+          </tr>
+        </ng-template>
 
-      <ng-template pTemplate="body" let-p>
-        <tr>
-          <td>{{ p.id }}</td>
-          <td>{{ p.descricao }}</td>
-          <td class="col-acoes">
-            <a pButton icon="fa fa-pencil" pTooltip="Editar"
-              tooltipPosition="top"></a>
+        <ng-template pTemplate="body" let-p>
+          <tr>
+            <td>{{ p.id }}</td>
+            <td>{{ p.descricao }}</td>
+            <td class="col-acoes">
+              <a pButton icon="fa fa-pencil" pTooltip="Editar"
+                 tooltipPosition="top"></a>
 
-            <button pButton icon="fa fa-trash"
-              pTooltip="Excluir" tooltipPosition="top"></button>
-          </td>
-        </tr>
-      </ng-template>
+              <button pButton icon="fa fa-trash"
+                      pTooltip="Excluir" tooltipPosition="top"></button>
+            </td>
+          </tr>
+        </ng-template>
 
-    </p-table>
+      </p-table>
 
-  </div>
+    </div>
 
   </div>
 

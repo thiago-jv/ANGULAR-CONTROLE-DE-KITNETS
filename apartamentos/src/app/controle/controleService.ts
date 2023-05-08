@@ -1,7 +1,7 @@
-import { Headers, URLSearchParams } from '@angular/http';
-import { Injectable } from '@angular/core';
+import {Headers, URLSearchParams} from '@angular/http';
+import {Injectable} from '@angular/core';
 import 'rxjs/add/operator/toPromise';
-import { ControleFiltro, ControleLancamento } from '../core/model';
+import {ControleFiltro, ControleLancamento} from '../core/model';
 import * as moment from 'moment';
 import {AuthHttp} from 'angular2-jwt';
 
@@ -10,7 +10,8 @@ export class ControleService {
 
   controleUrl = 'http://localhost:8089/apartamentosapi/v1/controles';
 
-  constructor(private http: AuthHttp) { }
+  constructor(private http: AuthHttp) {
+  }
 
   pequisar(filtro: ControleFiltro): Promise<any> {
     const params = new URLSearchParams();
@@ -40,7 +41,7 @@ export class ControleService {
       params.set('statusApartamePagamentoLuz', filtro.statusApartamePagamentoLuz);
     }
 
-    return this.http.get(`${this.controleUrl}?pesquisar`, { search: params })
+    return this.http.get(`${this.controleUrl}?pesquisar`, {search: params})
       .toPromise()
       .then(response => {
         const responseJson = response.json();
@@ -74,8 +75,8 @@ export class ControleService {
     return this.http.post(this.controleUrl, JSON.stringify(controle))
       .toPromise()
       .then(response => response.json()).catch(error => {
-        if(error.status == 409){
-          return Promise.reject("Inquilino de id  " + `${controle.inquilino.id}` + " ou "+ "Apartamento de id " + `${controle.apartamento.id}` + " não pode ser usado, pois está em uso");
+        if (error.status == 409) {
+          return Promise.reject('Inquilino de id  ' + `${controle.inquilino.id}` + ' ou ' + 'Apartamento de id ' + `${controle.apartamento.id}` + ' não pode ser usado, pois está em uso');
         }
       });
   }
@@ -83,7 +84,7 @@ export class ControleService {
   atualizar(controle: ControleLancamento): Promise<ControleLancamento> {
 
     return this.http.put(`${this.controleUrl}/${controle.id}`,
-        JSON.stringify(controle))
+      JSON.stringify(controle))
       .toPromise()
       .then(response => response.json() as ControleLancamento);
   }
@@ -108,10 +109,11 @@ export class ControleService {
     return this.http.put(`${this.controleUrl}/${id}/status`, {headers})
       .toPromise()
       .then(response => null).catch(error => {
-        if(error.status == 409){
-          return Promise.reject("Locação de código " + `${id}` + " não pode ser fechado, pois está em débito");
-        }});
-    }
+        if (error.status == 409) {
+          return Promise.reject('Locação de código ' + `${id}` + ' não pode ser fechado, pois está em débito');
+        }
+      });
+  }
 
 
   private converterStringsParaDatas(controles: ControleLancamento[]) {
@@ -119,11 +121,11 @@ export class ControleService {
       controle.dataPagamento = moment(controle.dataPagamento,
         'YYYY-MM-DD').toDate();
 
-        controle.dataEntrada = moment(controle.dataEntrada,
-          'YYYY-MM-DD').toDate();
+      controle.dataEntrada = moment(controle.dataEntrada,
+        'YYYY-MM-DD').toDate();
 
-        controle.dataEntrada = moment(controle.dataEntrada,
-          'YYYY-MM-DD').toDate();
+      controle.dataEntrada = moment(controle.dataEntrada,
+        'YYYY-MM-DD').toDate();
     }
   }
 

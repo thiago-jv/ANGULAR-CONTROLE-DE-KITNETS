@@ -3,7 +3,8 @@
   <div class="container">
     <div class="ui-g">
       <div class="ui-g-12">
-        <a href="javascript:;" class="navbar-toggle" (click)="exibindoMenu = !exibindoMenu"><i class="fa fa-bars"></i></a>
+        <a href="javascript:;" class="navbar-toggle" (click)="exibindoMenu = !exibindoMenu"><i
+          class="fa fa-bars"></i></a>
       </div>
     </div>
   </div>
@@ -59,7 +60,7 @@
         *ngIf="auth.temPermissao('ROLE_LANCAMENTO')"><a routerLink="/controles">Lista Controle</a></li>
     <!-- controle -->
 
-    <li class="navbar-menuitem"><a href="#">Logout</a></li>
+    <li class="navbar-menuitem"><a href="javascript:;" (click)="logout()">Logout</a></li>
 
   </ul>
 

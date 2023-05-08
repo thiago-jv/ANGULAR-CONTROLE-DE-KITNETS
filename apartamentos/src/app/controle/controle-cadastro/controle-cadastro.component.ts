@@ -1,14 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { Title } from '@angular/platform-browser';
-import { ActivatedRoute, Router } from '@angular/router';
-import { ToastyService } from 'ng2-toasty';
-import { ApartamentoService } from '../../apartamento/apartamentoService';
-import { ErrorHandlerService } from '../../core/ErrorHandlerService';
-import { ControleLancamento } from '../../core/model';
-import { InquilinoService } from '../../inquilino/inquilinoService';
-import { ValorService } from '../../valor/valorService';
-import { ControleService } from '../controleService';
+import {Component, OnInit} from '@angular/core';
+import {FormControl} from '@angular/forms';
+import {Title} from '@angular/platform-browser';
+import {ActivatedRoute, Router} from '@angular/router';
+import {ToastyService} from 'ng2-toasty';
+import {ApartamentoService} from '../../apartamento/apartamentoService';
+import {ErrorHandlerService} from '../../core/ErrorHandlerService';
+import {ControleLancamento} from '../../core/model';
+import {InquilinoService} from '../../inquilino/inquilinoService';
+import {ValorService} from '../../valor/valorService';
+import {ControleService} from '../controleService';
 
 @Component({
   selector: 'app-controle-cadastro',
@@ -18,27 +18,27 @@ import { ControleService } from '../controleService';
 export class ControleCadastroComponent implements OnInit {
 
   controle = new ControleLancamento();
-  inquilinos =[];
-  apartamentos =[];
-  valores =[];
+  inquilinos = [];
+  apartamentos = [];
+  valores = [];
 
   statusApartamePagamentoLuz = [
-    { label: 'Pago', value: 'PAGO' },
-    { label: 'Debito', value: 'DEBITO' },
+    {label: 'Pago', value: 'PAGO'},
+    {label: 'Debito', value: 'DEBITO'},
   ];
 
   statusApartamePagamento = [
-    { label: 'Pago', value: 'PAGO' },
-    { label: 'Debito', value: 'DEBITO' },
+    {label: 'Pago', value: 'PAGO'},
+    {label: 'Debito', value: 'DEBITO'},
   ];
-  
+
   entragaContaLuz = [
-    { label: 'Sim', value: 'SIM' },
-    { label: 'Não', value: 'NAO' },
+    {label: 'Sim', value: 'SIM'},
+    {label: 'Não', value: 'NAO'},
   ];
   statusProximoPagamento = [
-    { label: 'Pago', value: 'PAGO' },
-    { label: 'Debito', value: 'DEBITO' },
+    {label: 'Pago', value: 'PAGO'},
+    {label: 'Debito', value: 'DEBITO'},
   ];
 
   pt: any;
@@ -52,12 +52,13 @@ export class ControleCadastroComponent implements OnInit {
     private errorHandler: ErrorHandlerService,
     private route: ActivatedRoute,
     private router: Router,
-    private title: Title) { }
+    private title: Title) {
+  }
 
   ngOnInit() {
     console.log(this.route.snapshot.params['id']);
     const idcontrole = this.route.snapshot.params['id'];
-    this.title.setTitle('Novo controle')
+    this.title.setTitle('Novo controle');
     this.controle.status.entragaContaLuz = 'NAO';
     this.controle.status.statusProximoPagamento = 'DEBITO';
     this.controle.status.statusApartamePagamentoLuz = 'DEBITO';
@@ -66,7 +67,7 @@ export class ControleCadastroComponent implements OnInit {
     this.carregarApartamentos();
     this.carregarInquilinos();
 
-    if(idcontrole){
+    if (idcontrole) {
       this.carregarControles(idcontrole);
     }
     this.pt = {
@@ -79,43 +80,43 @@ export class ControleCadastroComponent implements OnInit {
       monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
       today: 'Hoje',
       clear: 'Limpar'
-  };
-}
+    };
+  }
 
 
-carregarValores() {
-  return this.valoresService.listarTodas()
-    .then(valores => {
-      this.valores = valores
-        .map(v => ({ label: v.valor, value: v.id }));
-    })
-    .catch(erro => this.errorHandler.handle(erro));
-}
+  carregarValores() {
+    return this.valoresService.listarTodas()
+      .then(valores => {
+        this.valores = valores
+          .map(v => ({label: v.valor, value: v.id}));
+      })
+      .catch(erro => this.errorHandler.handle(erro));
+  }
 
-carregarApartamentos() {
-  return this.apartamentoService.listarTodosDisponiveis()
-    .then(apartamentos => {
-      this.apartamentos = apartamentos
-        .map(v => ({ label: v.descricao, value: v.id }));
-    })
-    .catch(erro => this.errorHandler.handle(erro));
-}
+  carregarApartamentos() {
+    return this.apartamentoService.listarTodosDisponiveis()
+      .then(apartamentos => {
+        this.apartamentos = apartamentos
+          .map(v => ({label: v.descricao, value: v.id}));
+      })
+      .catch(erro => this.errorHandler.handle(erro));
+  }
 
-carregarInquilinos() {
-  return this.inquilinoService.listarTodosAtivos()
-    .then(inquilinos => {
-      this.inquilinos = inquilinos
-        .map(i => ({ label: i.nome, value: i.id }));
-    })
-    .catch(erro => this.errorHandler.handle(erro));
-}
+  carregarInquilinos() {
+    return this.inquilinoService.listarTodosAtivos()
+      .then(inquilinos => {
+        this.inquilinos = inquilinos
+          .map(i => ({label: i.nome, value: i.id}));
+      })
+      .catch(erro => this.errorHandler.handle(erro));
+  }
 
-  atualizarControleEdicao(){
+  atualizarControleEdicao() {
     this.title.setTitle(`Edição de lancamento: ${this.controle.id}`);
   }
 
-  get editando(){
-    return Boolean(this.controle.id)
+  get editando() {
+    return Boolean(this.controle.id);
   }
 
   buscarPorIdValor(id: number) {
@@ -126,7 +127,7 @@ carregarInquilinos() {
       .catch(erro => this.errorHandler.handle(erro));
   }
 
-carregarControles(id: number) {
+  carregarControles(id: number) {
     this.controleService.buscarPorCodigo(id)
       .then(controle => {
         this.controle = controle;
@@ -168,6 +169,6 @@ carregarControles(id: number) {
       this.adicionarControles(form);
     }
   }
-  
+
 
 }

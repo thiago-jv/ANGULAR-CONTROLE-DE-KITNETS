@@ -1,7 +1,7 @@
-import { Headers, URLSearchParams } from '@angular/http';
-import { Injectable } from '@angular/core';
+import {Headers, URLSearchParams} from '@angular/http';
+import {Injectable} from '@angular/core';
 import 'rxjs/add/operator/toPromise';
-import { Apartamento, ApartamentoFiltro } from '../core/model';
+import {Apartamento, ApartamentoFiltro} from '../core/model';
 import {AuthHttp} from 'angular2-jwt';
 
 @Injectable()
@@ -9,7 +9,8 @@ export class ApartamentoService {
 
   apartamentoUrl = 'http://localhost:8089/apartamentosapi/v1/apartamentos';
 
-  constructor(private http: AuthHttp) { }
+  constructor(private http: AuthHttp) {
+  }
 
   pequisar(filtro: ApartamentoFiltro): Promise<any> {
     const params = new URLSearchParams();
@@ -29,7 +30,7 @@ export class ApartamentoService {
       params.set('statusApartamento', filtro.statusApartamento);
     }
 
-    return this.http.get(`${this.apartamentoUrl}?pesquisar`, { search: params })
+    return this.http.get(`${this.apartamentoUrl}?pesquisar`, {search: params})
       .toPromise()
       .then(response => {
         const responseJson = response.json();
@@ -56,9 +57,10 @@ export class ApartamentoService {
     return this.http.delete(`${this.apartamentoUrl}/${id}`)
       .toPromise()
       .then(response => null).catch(error => {
-          if(error.status == 409){
-            return Promise.reject("Apartamento de código " + `${id}` + " não pode ser removida, pois está em uso");
-          }});
+        if (error.status == 409) {
+          return Promise.reject('Apartamento de código ' + `${id}` + ' não pode ser removida, pois está em uso');
+        }
+      });
   }
 
   adicionar(apartamento: Apartamento): Promise<Apartamento> {
@@ -71,7 +73,7 @@ export class ApartamentoService {
   atualizar(apartamento: Apartamento): Promise<Apartamento> {
 
     return this.http.put(`${this.apartamentoUrl}/${apartamento.id}`,
-        JSON.stringify(apartamento))
+      JSON.stringify(apartamento))
       .toPromise()
       .then(response => response.json() as Apartamento);
   }

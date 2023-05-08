@@ -1,129 +1,134 @@
 <div class="container">
   <form autocomplete="off" (ngSubmit)="pesquisar()">
-  <div class="ui-g">
+    <div class="ui-g">
 
-    <div class="ui-g-12">
-      <h1>Lançamentos</h1>
-    </div>
-
-    <div class="ui-g-12 ui-md-6 ui-fluid">
-      <label>Data pagamento de:</label>
-      <p-calendar dateFormat="dd/mm/yy"
-          name="dataPagamentoDe" [(ngModel)]="filtro.dataPagamentoDe" [locale]="pt"></p-calendar>
-    </div>
-
-    <div class="ui-g-12 ui-md-6 ui-fluid">
-      <label>Data pagamento ate:</label>
-      <p-calendar dateFormat="dd/mm/yy"
-          name="dataPagamentoAte" [(ngModel)]="filtro.dataPagamentoAte" [locale]="pt"></p-calendar>
-    </div>
-
-    <div class="ui-g-12 ui-md-4 ui-fluid">
-      <label>Pagou?</label>
-      <p-dropdown name="statusApartamePagamento" [options]="statusApartamePagamento"
-      [autoWidth]="false"
-      [(ngModel)]="filtro.statusApartamePagamento"></p-dropdown>
-    </div>
-
-    <div class="ui-g-12 ui-md-4 ui-fluid">
-      <label>Entregou Luz?</label>
-      <p-dropdown name="entragaContaLuz" [options]="entragaContaLuz"
-      [autoWidth]="false"
-      [(ngModel)]="filtro.entragaContaLuz"></p-dropdown>
-    </div>
-
-    <div class="ui-g-12 ui-md-4 ui-fluid">
-      <label>Pagou Luz?</label>
-      <p-dropdown name="statusApartamePagamentoLuz" [options]="statusApartamePagamentoLuz"
-      [autoWidth]="false"
-      [(ngModel)]="filtro.statusApartamePagamentoLuz"></p-dropdown>
-    </div>
-
-  </div>
-
-  <div class="ui-g">
-    <div class="ui-g-12" style="margin-top: 30px;">
-
-    <p-toolbar>
-      <div class="ui-toolbar-group-left">
-        <button pButton type="submit" label="Pesquisar"></button>
+      <div class="ui-g-12">
+        <h1>Lançamentos</h1>
       </div>
 
-      <div class="ui-toolbar-group-right">
-        <a pButton label="Novo" routerLink="/controle"></a>
+      <div class="ui-g-12 ui-md-6 ui-fluid">
+        <label>Data pagamento de:</label>
+        <p-calendar dateFormat="dd/mm/yy"
+                    name="dataPagamentoDe" [(ngModel)]="filtro.dataPagamentoDe" [locale]="pt"></p-calendar>
       </div>
-    </p-toolbar>
+
+      <div class="ui-g-12 ui-md-6 ui-fluid">
+        <label>Data pagamento ate:</label>
+        <p-calendar dateFormat="dd/mm/yy"
+                    name="dataPagamentoAte" [(ngModel)]="filtro.dataPagamentoAte" [locale]="pt"></p-calendar>
+      </div>
+
+      <div class="ui-g-12 ui-md-4 ui-fluid">
+        <label>Pagou?</label>
+        <p-dropdown name="statusApartamePagamento" [options]="statusApartamePagamento"
+                    [autoWidth]="false"
+                    [(ngModel)]="filtro.statusApartamePagamento"></p-dropdown>
+      </div>
+
+      <div class="ui-g-12 ui-md-4 ui-fluid">
+        <label>Entregou Luz?</label>
+        <p-dropdown name="entragaContaLuz" [options]="entragaContaLuz"
+                    [autoWidth]="false"
+                    [(ngModel)]="filtro.entragaContaLuz"></p-dropdown>
+      </div>
+
+      <div class="ui-g-12 ui-md-4 ui-fluid">
+        <label>Pagou Luz?</label>
+        <p-dropdown name="statusApartamePagamentoLuz" [options]="statusApartamePagamentoLuz"
+                    [autoWidth]="false"
+                    [(ngModel)]="filtro.statusApartamePagamentoLuz"></p-dropdown>
+      </div>
+
     </div>
-  </div>
-</form>
+
+    <div class="ui-g">
+      <div class="ui-g-12" style="margin-top: 30px;">
+
+        <p-toolbar>
+          <div class="ui-toolbar-group-left">
+            <button pButton type="submit" label="Pesquisar"></button>
+          </div>
+
+          <div class="ui-toolbar-group-right">
+            <a pButton label="Novo" routerLink="/controle"></a>
+          </div>
+        </p-toolbar>
+      </div>
+    </div>
+  </form>
 
   <div class="ui-g">
     <div class="ui-g-12">
 
-   <p-table [value]="controles" [rows]="filtro.intensPorPagina" [totalRecords]="totalRegistros"
-      (onLazyLoad)="aoMudarPagina($event)" [lazy]="true" [paginator]="true" [responsive]="true" emptyMessage="Nenhum apartamento encontrado"
-      #tabela >
+      <p-table [value]="controles" [rows]="filtro.intensPorPagina" [totalRecords]="totalRegistros"
+               (onLazyLoad)="aoMudarPagina($event)" [lazy]="true" [paginator]="true" [responsive]="true"
+               emptyMessage="Nenhum apartamento encontrado"
+               #tabela>
 
-      <ng-template pTemplate="header">
-        <tr>
-          <th style="width:40px;">Id</th>
-          <th style="width:100px;">Inquilino</th>
-          <th style="width:50px;">Ap</th>
-          <th style="width:75px;">Medidor</th>
-          <th style="width:100px;">De</th>
-          <th style="width:100px;">Até</th>
-          <th style="width:100px;">Pagou?</th>
-          <th style="width:120px;">R$ Valor Locação Mês</th>
-          <th style="width:120px;">R$ Debito apartamento</th>
-          <th style="width:120px;">Dt. Prox. Pagamento</th>
-          <th style="width:120px;">Status Prox. Pagamento</th>
-          <th style="width:100px;">Entregou Luz?</th>
-          <th style="width:100px;">Pagou Luz?</th>
-          <th style="width:100px;">Status</th>
+        <ng-template pTemplate="header">
+          <tr>
+            <th style="width:40px;">Id</th>
+            <th style="width:100px;">Inquilino</th>
+            <th style="width:50px;">Ap</th>
+            <th style="width:75px;">Medidor</th>
+            <th style="width:100px;">De</th>
+            <th style="width:100px;">Até</th>
+            <th style="width:100px;">Pagou?</th>
+            <th style="width:120px;">R$ Valor Locação Mês</th>
+            <th style="width:120px;">R$ Debito apartamento</th>
+            <th style="width:120px;">Dt. Prox. Pagamento</th>
+            <th style="width:120px;">Status Prox. Pagamento</th>
+            <th style="width:100px;">Entregou Luz?</th>
+            <th style="width:100px;">Pagou Luz?</th>
+            <th style="width:100px;">Status</th>
 
-          <th style="width:100px;"></th>
-        </tr>
-      </ng-template>
+            <th style="width:100px;"></th>
+          </tr>
+        </ng-template>
 
-      <ng-template pTemplate="body" let-c>
-        <tr>
-          <td>{{ c.id}}</td>
-          <td>{{ c.inquilino.nomeAbreviado}}</td>
-          <td >{{ c.apartamento.descricao}}</td>
+        <ng-template pTemplate="body" let-c>
+          <tr>
+            <td>{{ c.id}}</td>
+            <td>{{ c.inquilino.nomeAbreviado}}</td>
+            <td>{{ c.apartamento.descricao}}</td>
 
-          <td >{{ c.apartamento.medidor}}</td>
-          <td >{{ c.dataEntrada | date:'dd/MM/yyyy'}}</td>
-          <td >{{ c.dataPagamento | date:'dd/MM/yyyy'}}</td>
-          <td [style.background-color]="c.status.statusApartamePagamento === 'PAGO' ? 'green' : 'red'">{{ c.status.statusApartamePagamento }}</td>
-          <td >{{ c.valor.valor | number:'1.2-2'}}</td>
-          <td >{{ c.valores.valorDebitoApartamento | number:'1.2-2'}}</td>
-          <td >{{ c.dataPagamento | date:'dd/MM/yyyy'}}</td>
-          <td [style.background-color]="c.status.statusProximoPagamento === 'PAGO' ? 'green' : 'red'">{{ c.status.statusProximoPagamento}}</td>
-          <td [style.background-color]="c.status.entragaContaLuz === 'SIM' ? 'green' : 'red'">{{ c.status.entragaContaLuz}}</td>
-          <td [style.background-color]="c.status.statusApartamePagamentoLuz === 'PAGO' ? 'green' : 'red'">{{ c.status.statusApartamePagamentoLuz}}</td>
-          <td>
-          <a href="javascript:;"
-                [pTooltip]="c.status.statusControle ? 'Aberto' : 'Fechado'"
-                tooltipPosition="top"
-                (click)="alternarStatus(c)">
+            <td>{{ c.apartamento.medidor}}</td>
+            <td>{{ c.dataEntrada | date:'dd/MM/yyyy'}}</td>
+            <td>{{ c.dataPagamento | date:'dd/MM/yyyy'}}</td>
+            <td
+              [style.background-color]="c.status.statusApartamePagamento === 'PAGO' ? 'green' : 'red'">{{ c.status.statusApartamePagamento }}</td>
+            <td>{{ c.valor.valor | number:'1.2-2'}}</td>
+            <td>{{ c.valores.valorDebitoApartamento | number:'1.2-2'}}</td>
+            <td>{{ c.dataPagamento | date:'dd/MM/yyyy'}}</td>
+            <td
+              [style.background-color]="c.status.statusProximoPagamento === 'PAGO' ? 'green' : 'red'">{{ c.status.statusProximoPagamento}}</td>
+            <td
+              [style.background-color]="c.status.entragaContaLuz === 'SIM' ? 'green' : 'red'">{{ c.status.entragaContaLuz}}</td>
+            <td
+              [style.background-color]="c.status.statusApartamePagamentoLuz === 'PAGO' ? 'green' : 'red'">{{ c.status.statusApartamePagamentoLuz}}</td>
+            <td>
+              <a href="javascript:;"
+                 [pTooltip]="c.status.statusControle ? 'Aberto' : 'Fechado'"
+                 tooltipPosition="top"
+                 (click)="alternarStatus(c)">
                 {{ c.status.statusControle ? 'Aberto' : 'Fechado'}}
-          </a>
+              </a>
             </td>
-          <td class="col-acoes">
-            <a pButton icon="fa fa-pencil" pTooltip="Editar"
-              tooltipPosition="top"
-              [routerLink]="['/controle', c.id]"></a>
+            <td class="col-acoes">
+              <a pButton icon="fa fa-pencil" pTooltip="Editar"
+                 tooltipPosition="top"
+                 [routerLink]="['/controle', c.id]"></a>
 
-            <button pButton icon="fa fa-trash"
-              pTooltip="Excluir" tooltipPosition="top"
-              (click)="confirmarExclusao(c)"></button>
-          </td>
-        </tr>
-      </ng-template>
+              <button pButton icon="fa fa-trash"
+                      pTooltip="Excluir" tooltipPosition="top"
+                      (click)="confirmarExclusao(c)"></button>
+            </td>
+          </tr>
+        </ng-template>
 
-    </p-table>
+      </p-table>
 
-  </div>
+    </div>
 
   </div>
 

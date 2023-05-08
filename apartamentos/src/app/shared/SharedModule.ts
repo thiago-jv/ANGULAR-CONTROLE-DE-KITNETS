@@ -1,6 +1,6 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { MessageComponent } from './message/MessageComponent';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {MessageComponent} from './message/MessageComponent';
 
 @NgModule({
   imports: [
@@ -13,4 +13,5 @@ import { MessageComponent } from './message/MessageComponent';
     MessageComponent
   ]
 })
-export class SharedModule { }
+export class SharedModule {
+}

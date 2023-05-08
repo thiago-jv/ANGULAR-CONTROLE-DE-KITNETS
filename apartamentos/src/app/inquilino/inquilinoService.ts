@@ -1,7 +1,7 @@
-import { Http, Headers, URLSearchParams } from '@angular/http';
-import { Injectable } from '@angular/core';
+import {URLSearchParams} from '@angular/http';
+import {Injectable} from '@angular/core';
 import 'rxjs/add/operator/toPromise';
-import { Inquilino, InquilinoFiltro } from '../core/model';
+import {Inquilino, InquilinoFiltro} from '../core/model';
 import {AuthHttp} from 'angular2-jwt';
 
 @Injectable()
@@ -9,9 +9,10 @@ export class InquilinoService {
 
   inquilinoUrl = 'http://localhost:8089/apartamentosapi/v1/inquilinos';
 
-  constructor(private http: AuthHttp) { }
+  constructor(private http: AuthHttp) {
+  }
 
-  pequisar(filtro: InquilinoFiltro): Promise<any>{
+  pequisar(filtro: InquilinoFiltro): Promise<any> {
     const params = new URLSearchParams();
 
     params.set('page', filtro.pagina.toString());
@@ -29,7 +30,7 @@ export class InquilinoService {
       params.set('status', filtro.status);
     }
 
-    return this.http.get(`${this.inquilinoUrl}?pesquisar`, { search: params })
+    return this.http.get(`${this.inquilinoUrl}?pesquisar`, {search: params})
       .toPromise()
       .then(response => {
         const responseJson = response.json();
@@ -41,7 +42,7 @@ export class InquilinoService {
         };
 
         return resultado;
-      })
+      });
   }
 
   listarTodas(): Promise<Inquilino> {
@@ -63,10 +64,11 @@ export class InquilinoService {
     return this.http.delete(`${this.inquilinoUrl}/${id}`)
       .toPromise()
       .then(response => null).catch(error => {
-        if(error.status == 409){
-          return Promise.reject("Inquilino de código " + `${id}` + " não pode ser removido, pois está em uso");
-        }});
-}
+        if (error.status == 409) {
+          return Promise.reject('Inquilino de código ' + `${id}` + ' não pode ser removido, pois está em uso');
+        }
+      });
+  }
 
   adicionar(inquilino: Inquilino): Promise<Inquilino> {
 
@@ -78,7 +80,7 @@ export class InquilinoService {
   atualizar(inquilino: Inquilino): Promise<Inquilino> {
 
     return this.http.put(`${this.inquilinoUrl}/${inquilino.id}`,
-        JSON.stringify(inquilino))
+      JSON.stringify(inquilino))
       .toPromise()
       .then(response => response.json() as Inquilino);
   }

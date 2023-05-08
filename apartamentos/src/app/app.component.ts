@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { ToastyConfig } from 'ng2-toasty';
+import {Component} from '@angular/core';
+import {ToastyConfig} from 'ng2-toasty';
 import {Router} from '@angular/router';
 
 @Component({

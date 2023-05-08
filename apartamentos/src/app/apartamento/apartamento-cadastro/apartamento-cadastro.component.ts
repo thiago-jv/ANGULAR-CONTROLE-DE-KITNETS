@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { Title } from '@angular/platform-browser';
-import { ActivatedRoute, Router } from '@angular/router';
-import { ToastyService } from 'ng2-toasty';
-import { ErrorHandlerService } from '../../core/ErrorHandlerService';
-import { Apartamento } from '../../core/model';
-import { PredioService } from '../../predio/predioService';
-import { ApartamentoService } from '../apartamentoService';
+import {Component, OnInit} from '@angular/core';
+import {FormControl} from '@angular/forms';
+import {Title} from '@angular/platform-browser';
+import {ActivatedRoute, Router} from '@angular/router';
+import {ToastyService} from 'ng2-toasty';
+import {ErrorHandlerService} from '../../core/ErrorHandlerService';
+import {Apartamento} from '../../core/model';
+import {PredioService} from '../../predio/predioService';
+import {ApartamentoService} from '../apartamentoService';
 
 @Component({
   selector: 'app-apartamento-cadastro',
@@ -18,9 +18,9 @@ export class ApartamentoCadastroComponent implements OnInit {
   apartamento = new Apartamento();
   predios = [];
   statusApartamentos = [
-    { label: 'Disponivel', value: 'DISPONIVEL' },
-    { label: 'Ocupado', value: 'OCUPADO' },
-    { label: 'Manutencao', value: 'MANUTENCAO' },
+    {label: 'Disponivel', value: 'DISPONIVEL'},
+    {label: 'Ocupado', value: 'OCUPADO'},
+    {label: 'Manutencao', value: 'MANUTENCAO'},
   ];
 
   constructor(
@@ -30,7 +30,8 @@ export class ApartamentoCadastroComponent implements OnInit {
     private errorHandler: ErrorHandlerService,
     private route: ActivatedRoute,
     private router: Router,
-    private title: Title) { }
+    private title: Title) {
+  }
 
   ngOnInit() {
     console.log(this.route.snapshot.params['id']);
@@ -38,7 +39,7 @@ export class ApartamentoCadastroComponent implements OnInit {
     this.title.setTitle('Novo apartamento');
     this.carregarPredios();
 
-    if(idpartamento){
+    if (idpartamento) {
       this.carregarApartamento(idpartamento);
     }
   }
@@ -47,16 +48,16 @@ export class ApartamentoCadastroComponent implements OnInit {
     return this.predioService.listarTodas()
       .then(predios => {
         this.predios = predios
-          .map(p => ({ label: p.descricao, value: p.id }));
+          .map(p => ({label: p.descricao, value: p.id}));
       })
       .catch(erro => this.errorHandler.handle(erro));
   }
 
-  atualizarTituloEdicao(){
+  atualizarTituloEdicao() {
     this.title.setTitle(`Edição de apartamento: ${this.apartamento.descricao}`);
   }
 
-  get editando(){
+  get editando() {
     return Boolean(this.apartamento.id);
   }
 

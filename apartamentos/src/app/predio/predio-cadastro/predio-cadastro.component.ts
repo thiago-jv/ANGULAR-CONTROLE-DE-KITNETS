@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { Title } from '@angular/platform-browser';
-import { ActivatedRoute, Router } from '@angular/router';
-import { ToastyService } from 'ng2-toasty';
-import { ErrorHandlerService } from '../../core/ErrorHandlerService';
-import { Predio } from '../../core/model';
-import { PredioService } from '../predioService';
+import {Component, OnInit} from '@angular/core';
+import {FormControl} from '@angular/forms';
+import {Title} from '@angular/platform-browser';
+import {ActivatedRoute, Router} from '@angular/router';
+import {ToastyService} from 'ng2-toasty';
+import {ErrorHandlerService} from '../../core/ErrorHandlerService';
+import {Predio} from '../../core/model';
+import {PredioService} from '../predioService';
 
 @Component({
   selector: 'app-predio-cadastro',
@@ -17,29 +17,30 @@ export class PredioCadastroComponent implements OnInit {
   predio = new Predio();
 
   constructor(private predioService: PredioService,
-    private toasty: ToastyService,
-    private errorHandler: ErrorHandlerService,
-    private route: ActivatedRoute,
-    private router: Router,
-    private title: Title) { }
+              private toasty: ToastyService,
+              private errorHandler: ErrorHandlerService,
+              private route: ActivatedRoute,
+              private router: Router,
+              private title: Title) {
+  }
 
   ngOnInit() {
 
     console.log(this.route.snapshot.params['id']);
     const idPredio = this.route.snapshot.params['id'];
-    this.title.setTitle('Novo predio')
+    this.title.setTitle('Novo predio');
 
-    if(idPredio){
+    if (idPredio) {
       this.carregarPredio(idPredio);
     }
   }
 
-  atualizarTituloEdicao(){
+  atualizarTituloEdicao() {
     this.title.setTitle(`Edição de predio: ${this.predio.descricao}`);
   }
 
-  get editando(){
-    return Boolean(this.predio.id)
+  get editando() {
+    return Boolean(this.predio.id);
   }
 
   carregarPredio(id: number) {

@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { Diario } from '../../core/model';
-import { FormControl } from '@angular/forms';
-import { DiarioService } from '../diario.service';
-import { ErrorHandlerService } from '../../core/ErrorHandlerService';
-import { ToastyService } from 'ng2-toasty';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Title } from '@angular/platform-browser';
+import {Component, OnInit} from '@angular/core';
+import {Diario} from '../../core/model';
+import {FormControl} from '@angular/forms';
+import {DiarioService} from '../diario.service';
+import {ErrorHandlerService} from '../../core/ErrorHandlerService';
+import {ToastyService} from 'ng2-toasty';
+import {ActivatedRoute, Router} from '@angular/router';
+import {Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-diario-cadastro',
@@ -22,7 +22,8 @@ export class DiarioCadastroComponent implements OnInit {
     private errorHandler: ErrorHandlerService,
     private route: ActivatedRoute,
     private router: Router,
-    private title: Title) { }
+    private title: Title) {
+  }
 
   ngOnInit() {
   }
@@ -36,12 +37,12 @@ export class DiarioCadastroComponent implements OnInit {
       .catch(erro => this.errorHandler.handle(erro));
   }
 
-  atualizarTituloEdicao(){
+  atualizarTituloEdicao() {
     this.title.setTitle(`Edição de diario: ${this.diario.descricao}`);
   }
 
-  get editando(){
-    return Boolean(this.diario.id)
+  get editando() {
+    return Boolean(this.diario.id);
   }
 
   novo(form: FormControl) {

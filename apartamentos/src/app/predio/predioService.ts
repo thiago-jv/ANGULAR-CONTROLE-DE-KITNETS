@@ -1,4 +1,4 @@
-import {Headers, URLSearchParams} from '@angular/http';
+import {URLSearchParams} from '@angular/http';
 import {Injectable} from '@angular/core';
 import 'rxjs/add/operator/toPromise';
 import {Predio, PredioFiltro} from '../core/model';

@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import {Http, Headers } from '@angular/http';
+import {Injectable} from '@angular/core';
+import {Http, Headers} from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
 import {JwtHelper} from 'angular2-jwt';
@@ -15,6 +15,7 @@ export class AuthService {
     private jwtHelper: JwtHelper) {
     this.carregarToken();
   }
+
   login(usuario: string, senha: string): Promise<void> {
     const headers = new Headers();
     headers.append('Content-Type', 'application/x-www-form-urlencoded');
@@ -22,7 +23,7 @@ export class AuthService {
 
     const body = `username=${usuario}&password=${senha}&grant_type=password`;
 
-    return this.http.post(this.oauthTokenUrl, body, { headers, withCredentials: true })
+    return this.http.post(this.oauthTokenUrl, body, {headers, withCredentials: true})
       .toPromise()
       .then(response => {
         this.armazenarToken(response.json().access_token);
@@ -65,7 +66,7 @@ export class AuthService {
     const body = 'grant_type=refresh_token';
 
     return this.http.post(this.oauthTokenUrl, body,
-      { headers, withCredentials: true })
+      {headers, withCredentials: true})
       .toPromise()
       .then(response => {
         this.armazenarToken(response.json().access_token);
@@ -94,6 +95,11 @@ export class AuthService {
     }
 
     return false;
+  }
+
+  limparAccessToken() {
+    localStorage.removeItem('token');
+    this.jwtPayload = null;
   }
 
 }

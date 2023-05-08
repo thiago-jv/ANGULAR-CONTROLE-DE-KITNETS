@@ -10,16 +10,16 @@
     <div class="ui-g">
       <div class="ui-g-12" style="margin-top: 10px;">
 
-      <p-toolbar>
-        <div class="ui-toolbar-group-left">
-          <button pButton type="submit" label="Salvar" [disabled]="f.invalid"></button>
-          <button pButton type="button" label="Novo" class="ui-button-info" (click)="novo(f)"></button>
-        </div>
+        <p-toolbar>
+          <div class="ui-toolbar-group-left">
+            <button pButton type="submit" label="Salvar" [disabled]="f.invalid"></button>
+            <button pButton type="button" label="Novo" class="ui-button-info" (click)="novo(f)"></button>
+          </div>
 
-        <div class="ui-toolbar-group-right">
-          <a pButton label="Pesquisar" routerLink="/valores"></a>
-        </div>
-      </p-toolbar>
+          <div class="ui-toolbar-group-right">
+            <a pButton label="Pesquisar" routerLink="/valores"></a>
+          </div>
+        </p-toolbar>
       </div>
     </div>
 
@@ -27,10 +27,10 @@
 
       <div class="ui-g-12 ui-md-6 ui-fluid">
         <label>Valor</label>
-          <input pInputText type="text" name="valor" placeholder="0,00"
-          currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',', allowNegative: false }"
-          [(ngModel)]="valor.valor"
-          required>
+        <input pInputText type="text" name="valor" placeholder="0,00"
+               currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',', allowNegative: false }"
+               [(ngModel)]="valor.valor"
+               required>
       </div>
 
     </div>
