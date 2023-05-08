@@ -7,14 +7,18 @@ import {InputTextModule} from 'primeng/inputtext';
 import {ButtonModule} from 'primeng/button';
 import {AuthConfig, AuthHttp} from 'angular2-jwt';
 import {Http, RequestOptions} from '@angular/http';
+import {AuthService} from './auth.service';
+import {MoneyHttp} from './money-http';
+import {AuthGuard} from './auth.guard';
 
-export function authHttpServiceFactory(http: Http, options: RequestOptions) {
+export function authHttpServiceFactory(auth: AuthService, http: Http, options: RequestOptions) {
   const config = new AuthConfig({
     globalHeaders: [
       { 'Content-Type': 'application/json' }
     ]
   });
-  return new AuthHttp(config, http, options);
+
+  return new MoneyHttp(auth, config, http, options);
 }
 
 
@@ -33,8 +37,9 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     {
       provide: AuthHttp,
       useFactory: authHttpServiceFactory,
-      deps: [Http, RequestOptions]
-    }
+      deps: [AuthService, Http, RequestOptions]
+    },
+    AuthGuard
   ]
 })
 export class SegurancaModule {

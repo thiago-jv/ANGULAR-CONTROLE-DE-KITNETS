@@ -22,6 +22,7 @@ import {MenubarModule} from 'primeng/menubar';
 import {DiarioService} from '../diario/diario.service';
 import {AuthService} from '../seguranca/auth.service';
 import {JwtHelper} from 'angular2-jwt';
+import {NaoAutorizadoComponent} from './nao-autorizado.component';
 
 registerLocaleData(localePt);
 
@@ -37,7 +38,9 @@ registerLocaleData(localePt);
   ],
   declarations: [
     NavbarComponent,
-    PaginaNaoEncontradaComponent],
+    PaginaNaoEncontradaComponent,
+    NaoAutorizadoComponent
+  ],
   exports: [
     NavbarComponent,
     ToastyModule,

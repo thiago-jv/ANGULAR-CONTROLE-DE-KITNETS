@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import {NaoAutorizadoComponent} from './core/nao-autorizado.component';
 
 const routes: Routes = [
 
@@ -9,7 +10,8 @@ const routes: Routes = [
   { path: 'valor', loadChildren: 'app/valor/valor.module#ValorModule' },
   { path: 'controle', loadChildren: 'app/controle/controle.module#ControleModule' },
   { path: 'diario', loadChildren: 'app/diario/diario.module#DiarioModule' },
-  { path: '**', redirectTo: 'pagina-nao-encontrada' }
+  { path: '**', redirectTo: 'pagina-nao-encontrada' },
+  { path: 'nao-autorizado', component: NaoAutorizadoComponent },
 ];
 
 @NgModule({

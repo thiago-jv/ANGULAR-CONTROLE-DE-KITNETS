@@ -21,7 +21,7 @@ export class DiarioPesquisaComponent implements OnInit {
   ngOnInit() {
   }
 
-    pesquisar(pagina = 0){
+    pesquisar(pagina = 0) {
       this.filtro.pagina = pagina;
 
       this.diarioService.pesquisar(this.filtro)
@@ -32,7 +32,7 @@ export class DiarioPesquisaComponent implements OnInit {
       .catch(erro => this.errorHandler.handle(erro));
     }
 
-    aoMudarPagina(event: LazyLoadEvent){
+    aoMudarPagina(event: LazyLoadEvent) {
       const pagina = event.first / event.rows;
       this.pesquisar(pagina);
      }
