@@ -16,7 +16,7 @@ Instalar o angular 6 -> npm install -g  @angular/cli@1.7.3
 
 # Estrutura do projeto
 
-![Estrutura do Projeto](https://github.com/thiago-jv/UI-CONTROLE-DE-KITNETS/blob/main/estrutura_projeto_front_end.png)
+![Estrutura do Projeto](https://github.com/thiago-jv/ANGULAR-CONTROLE-DE-KITNETS/blob/main/estrutura.png)
 
 
 # Tecnologias utilizadas e outros
