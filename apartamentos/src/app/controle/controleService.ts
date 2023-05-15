@@ -1,4 +1,4 @@
-import {Headers, URLSearchParams} from '@angular/http';
+import {Headers, ResponseContentType, URLSearchParams} from '@angular/http';
 import {Injectable} from '@angular/core';
 import 'rxjs/add/operator/toPromise';
 import {ControleFiltro, ControleLancamento} from '../core/model';
@@ -127,6 +127,16 @@ export class ControleService {
       controle.dataEntrada = moment(controle.dataEntrada,
         'YYYY-MM-DD').toDate();
     }
+  }
+
+  relatorioControleById(idLancamento: number) {
+    const params = new URLSearchParams();
+    params.set('idLancamento', String(idLancamento));
+
+    return this.http.get(`${this.controleUrl}/relatorio/por-controle-lancamento`,
+      { search: params, responseType: ResponseContentType.Blob })
+      .toPromise()
+      .then(response => response.blob());
   }
 
 }

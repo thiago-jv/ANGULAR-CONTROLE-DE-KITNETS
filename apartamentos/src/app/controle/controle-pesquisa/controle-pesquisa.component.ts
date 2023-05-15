@@ -19,6 +19,7 @@ export class ControlePesquisaComponent implements OnInit {
   controles = [];
   @ViewChild('tabela') grid;
   pt: any;
+  idLancamento: number;
 
   statusApartamePagamentoLuz = [
     {label: 'Selecione', value: ''},
@@ -130,6 +131,15 @@ export class ControlePesquisaComponent implements OnInit {
 
   refresh(): void {
     window.location.reload();
+  }
+
+  gerar(controle: any) {
+    this.controleService.relatorioControleById(controle.id)
+      .then(relatorio => {
+        const url = window.URL.createObjectURL(relatorio);
+
+        window.open(url);
+      });
   }
 
 }
