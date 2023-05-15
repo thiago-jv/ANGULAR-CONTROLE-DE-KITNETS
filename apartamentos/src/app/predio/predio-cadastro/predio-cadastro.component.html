@@ -92,7 +92,12 @@
         <input pInputText type="text" name="numero"
                name="numero"
                [(ngModel)]="predio.numero"
-               #numero="ngModel">
+               #numero="ngModel" required minlength="1">
+
+        <app-message [control]="numero" error="required"
+                     text="Informe o número"></app-message>
+        <app-message [control]="numero" error="minlength"
+                     text="Mínimo de {{ numero.errors?.minlength?.requiredLength }} caracteres"></app-message>
       </div>
 
 
