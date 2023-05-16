@@ -25,7 +25,7 @@ Instalar o angular 6 -> npm install -g  @angular/cli@1.7.3
 
 2- Nodejs [Sobre](https://nodejs.org/pt-br/about/)
 
-3- Primeng [Sobre](https://www.primefaces.org/primeng/v6.1.7/#/)
+3- Primeng [Sobre](https://www.primefaces.org/primeng-v7-lts/#/)
 
 
 # Proceso para rodar o projeto
