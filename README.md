@@ -13,6 +13,13 @@ Apos rodas os passos abaixo, rodar o back-end nesse link [BACK-END](https://gith
 
 Nodejs 8.17.0 [Nodejs](https://nodejs.org/pt-br/download/)
 
+nvm
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
+wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
+
+node
+nvm install 8
+
 Instalar o angular 6 -> npm install -g  @angular/cli@1.7.3
 
 # Estrutura do projeto
